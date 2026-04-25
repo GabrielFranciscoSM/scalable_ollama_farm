@@ -1,7 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{Listado de imágenes}{0}{section*.3}%
-\contentsline {section}{\numberline {1}Introducción}{1}{section.1}%
-\contentsline {section}{\numberline {2}Preliminares}{1}{section.2}%
-\contentsline {section}{\numberline {3}Objetivos}{1}{section.3}%
-\contentsline {section}{\numberline {4}Desarrollo y análisis}{1}{section.4}%
-\contentsline {section}{\numberline {5}Conclusiones}{1}{section.5}%
