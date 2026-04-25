@@ -26,16 +26,31 @@ services:
       - ollama:/root/.ollama
     restart: unless-stopped
 
+  redis:
+    image: redis/redis-stack:latest
+    container_name: fase0-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+      # - "8001:8001"
+
   litellm:
     image: ghcr.io/berriai/litellm:main-latest
     container_name: fase0-litellm
-    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "1"]
+    command: [
+      "--config", "/app/config.yaml", 
+      "--port", "4000", 
+      "--host", "0.0.0.0",
+      "--num_workers", "1"
+    ]
     depends_on:
       - ollama1
       - ollama2
       - ollama3
+      - redis
     environment:
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
+      REDIS_URL: "redis://redis:6379"
     volumes:
       - ./litellm/config.yaml:/app/config.yaml:ro
     restart: unless-stopped
