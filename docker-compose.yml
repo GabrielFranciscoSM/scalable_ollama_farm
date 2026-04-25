@@ -34,7 +34,12 @@ services:
   litellm:
     image: ghcr.io/berriai/litellm:main-latest
     container_name: fase0-litellm
-    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "1"]
+    command: [
+      "--config", "/app/config.yaml", 
+      "--port", "4000", 
+      "--host", "0.0.0.0",
+      "--num_workers", "1"
+    ]
     depends_on:
       - ollama1
       - ollama2
