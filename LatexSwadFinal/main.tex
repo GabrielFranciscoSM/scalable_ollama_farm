@@ -1,0 +1,273 @@
+% Inicio del preámbulo
+
+\documentclass[letterpaper,11pt]{article} %Modifica el tipo de documento y el tamaño de la letra.
+\usepackage[utf8]{inputenc} %Formato UTF-8 para caracteres especiales.
+\usepackage[
+  style = ieee,
+  backend = biber,
+  url=true, 
+  isbn = false,
+  maxbibnames = 6, % Número máximo de autores que pueden aparecer en una referencia (6)
+  minnames=1,
+  citestyle=numeric] % Número mínimo de autores que aparecerán al truncar: autor1 et al.
+{biblatex}
+
+\addbibresource{referencias.bib}
+
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{listings}
+\lstdefinelanguage{Dockerfile}{
+    morekeywords={
+        FROM, RUN, CMD, LABEL, MAINTAINER, EXPOSE, ENV,
+        ADD, COPY, ENTRYPOINT, VOLUME, USER, WORKDIR,
+        ARG, ONBUILD, STOPSIGNAL, HEALTHCHECK, SHELL
+    },
+    morecomment=[l]{\#},
+    morestring=[b]"
+}
+\lstdefinelanguage{docker-compose}{
+    keywords={version, services, volumes, networks, build, image, ports, environment,
+     container_name, depends_on, command, driver, name, ipam, config, subnet, context,
+     dockerfile, ipv4_address},
+    keywordstyle=\color{blue}\bfseries,
+    comment=[l]{\#},
+    commentstyle=\color{green}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    morestring=[b]",
+    morestring=[b]'
+}
+\lstdefinelanguage{Ini}
+{
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    morecomment=[l]{;}, % Comentarios con punto y coma
+    morecomment=[l]{\#}, % Comentarios con almohadilla
+    commentstyle=\color{gray}\ttfamily,
+    morekeywords={}, % No palabras clave por defecto
+    otherkeywords={=,:}, % Operadores de asignación
+    keywordstyle=\color{green}\bfseries,
+    moredelim=[s][\color{Orchid}\bfseries]{[}{]}, % Secciones entre corchetes
+    escapechar=@ % Permite usar LaTeX dentro del código si es necesario
+}
+
+\lstdefinelanguage{configure}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{blue},
+    keywordstyle=\color{purple}\bfseries,
+    morekeywords={
+        server, location, proxy_pass, proxy_set_header, proxy_hide_header,
+        stub_status, access_log, error_log, server_name, listen, upstream, http,
+        events, worker_connections},
+    morecomment=[l]{\#},
+    morestring=[b]",
+    showstringspaces=false,
+    texcl=true,
+    frame=single
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,
+  alsoletter={<>=-},
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  otherkeywords={
+    % General
+    >,
+    % Standard tags
+    <!DOCTYPE, </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+    % body
+    </body, <body,
+    % Divs
+    </div, <div, </div>,
+    % Paragraphs
+    </p, <p, </p>,
+    % scripts
+    </script, <script,
+    % More tags...
+    <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
+  },
+  ndkeywords={
+    % General
+    =,
+    % HTML attributes
+    charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+    % SVG attributes
+    fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+    % properties
+    margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+    % CSS3 properties
+    transform:, -moz-transform:, -webkit-transform:,
+    animation:, -webkit-animation:,
+    transition:, transition-duration:, transition-property:, transition-timing-function:
+  }
+}
+
+
+\usepackage[a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath,amssymb,amsfonts,latexsym,cancel}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage[rflt]{floatflt}
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr} %Paquete para el header y el formato de la portada. No sugiero borrarlo!
+\usepackage{float}
+\usepackage{longtable,multirow,booktabs}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{adjustbox}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{wrapfig} %texto alrededor de Images \begin{wrapfigure}{alignment}{width}
+\usepackage{xlop}	%divisiones con caja \opidiv{316}{50}
+
+\newcommand\myrule[1]{\multicolumn{1}{| l}{#1}}
+
+\usepackage{multicol} %varias columnas
+
+\setlength{\parindent}{0pt}
+
+\usepackage{textcomp}   %poner símbolo copyright
+
+\usepackage{endnotes}
+\renewcommand{\notesname}{Notas}
+
+% Para hacer recuadros
+% https://ondahostil.wordpress.com/2017/05/17/lo-que-he-aprendido-cuadros-de-texto-de-colores-en-latex/
+\usepackage{tcolorbox}
+\newtcolorbox{mybox}[1]
+{colback=RoyalBlue!5!white,colframe=Black!75!black,fonttitle=\bfseries,title=#1}
+
+\definecolor{color1}{RGB}{192,72,72}
+\definecolor{color2}{RGB}{0,0,120}
+\definecolor{color3}{RGB}{0,0,255}
+\definecolor{color4}{RGB}{5,5,5}
+\definecolor{color5}{RGB}{255,160,160}
+\definecolor{light-gray}{HTML}{E5E4E2}
+\definecolor{light-cyan}{HTML}{E0FFFF}
+
+%%% Matemáticas Paquetes AMS
+\usepackage{amsfonts}
+\usepackage{amsmath} % Matemáticas
+\usepackage{amssymb,amsthm} % Símbolos y teoremas
+\usepackage{mathtools} % % Algunos añadidos y correcciones a amsmath
+\usepackage{upgreek} % Letras griegas
+\usepackage{esvect}
+\usepackage{dsfont} % Conjunto unario
+
+\numberwithin{equation}{section}
+\allowdisplaybreaks[1] % 1-4, permite partir ecuaciones entre páginas
+
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\nul}{nul}
+\DeclareMathOperator{\indice}{indice}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gl}{Gl}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\dist}{d}
+
+\addto\captionsspanish{\renewcommand{\listfigurename}{Listado de imágenes}}   
+
+% teoremas
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{prop}{Proposición}[section]
+\newtheorem{coro}[teorema]{Corolario}
+\newtheorem{lema}[teorema]{Lema}
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definición}
+\theoremstyle{remark}
+\newtheorem*{observacion}{Observación} 
+\theoremstyle{remark}
+\newtheorem*{ejemplos}{Ejemplos}
+\theoremstyle{remark}
+\newtheorem*{propiedades}{Propiedades}
+\theoremstyle{remark}
+\newtheorem*{propiedad}{Propiedad}
+
+
+\usepackage{multirow} % Tablas con casillas de varias alturas
+
+
+%Fin de Préambulo
+
+% Variables del documento
+% Document Variables 
+\newcommand{\myDepartment}{Ingeniería de Computadores,\par Automática y Robótica}
+\newcommand{\myDepartmentAbrev}{DECSAI}
+\newcommand{\myMateria}{Servidores Web de Altas Prestaciones}
+\newcommand{\mySemester}{2º, 2025-26}
+\newcommand{\myReport}{Trabajo final: Granja de Modelos IA}
+\newcommand{\myName}{Manuel Ruiz Aguilar, \href{mailto:manuel100@correo.ugr.es} {manuel100@correo.ugr.es}, A3}
+\newcommand{\myNameA}{Francisco Javier Pérez García, \href{mailto:ingmatfco@correo.ugr.es} {ingmatfco@correo.ugr.es}, A2}
+\newcommand{\myNameB}{Gabriel Sánchez Muñoz, \href{mailto:manuel100@correo.ugr.es} {manuel100@correo.ugr.es}, A3}
+\def\teacherA{José Manuel Soto Hidalgo, \href{jmsoto@ugr.es} {jmsoto@ugr.es}}
+\def\teacherB{Míriam Mengíbar Rodríguez, \href{mirismr@ugr.es}{mirismr@ugr.es}}
+\newcommand{\myUnidad}{\myReport}
+\author{}
+\date{}
+
+%Inicio formato de Página. 
+\pagestyle{fancy} %Diseño de la página
+
+%\fancyhf{}
+\rfoot{\myMateria, \myDepartmentAbrev}%%LeftHead
+\lfoot{\thepage}
+\lhead{\leftmark}
+%\rfoot{\it{Ruiz Aguilar, Manuel}}
+%\rhead{\myReport}%%RightHead
+\rhead{\textbf{\myReport}}
+%\hspace{0.25cm}
+\setlength{\columnsep}{4mm}%Comandos para el formato de la página.
+\setlength{\parindent}{3em}%Sangría al comenzar un nuevo párrafo.
+%\setlength{\parindent}{0.5in}
+\setlength{\parskip}{1.1em}%Distancia entre párrafos.
+\renewcommand{\baselinestretch}{1.0}% Espacio entre línea y línea o interlineado.
+\setlength{\headheight}{20pt}
+\setcounter{page}{-1}
+%\fancyfoot[C,CO]{\thepage} %Logo de LaTeX y pie de página.
+
+%Fin formato de Página
+
+%Aquí inicia el documento.
+\begin{document}
+
+    %LaTeX te hace el índice automáticamente conforme añades secciones en tu documento.
+    \input{portada.tex}
+    \newpage
+    \input{indice.tex}
+
+%    \newpage
+%Inicio parte opcional. Esta parte la puedes quitar si deseas, es por si te piden formatos para
+%evidencias de certificación de los laboratorios con números de cuenta o te piden abstracts en tus %trabajos.
+%\vspace{-2cm}
+\title{\textbf{\myReport} } 
+
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{-2cm}
+
+\input{contenido}
+
+\newpage
+
+\printbibliography[title={Bibliografía}, heading=bibintoc]
+
+\end{document}
+
+ %Fin del documento.
