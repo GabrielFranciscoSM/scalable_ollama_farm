@@ -22,6 +22,7 @@ model_list:
 
 litellm_settings:
   drop_params: true
+  set_verbose: True
 
 router_settings:
   routing_strategy: least-busy
