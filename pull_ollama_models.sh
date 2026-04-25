@@ -11,6 +11,7 @@ MODELS=(
   "qwen3.5:9b"
   "gemma3:12b"
   "phi4:14b"
+  "nomic-embed-text"
 )
 
 MIN_REQS=(
@@ -22,6 +23,7 @@ MIN_REQS=(
   "12 GB RAM or 8 GB VRAM"
   "16 GB RAM or 12 GB VRAM"
   "18 GB RAM or 16 GB VRAM"
+  "4 GB RAM or 2 GB VRAM"
 )
 
 if [ $# -ge 1 ]; then
@@ -32,14 +34,14 @@ else
     idx=$((i + 1))
     echo "  $idx) ${MODELS[$i]}  | min: ${MIN_REQS[$i]}"
   done
-  echo "  9) custom model"
+  echo " 10) custom model"
   echo
 
   read -rp "Choice [1-9]: " CHOICE
 
-  if [[ "$CHOICE" =~ ^[1-8]$ ]]; then
+  if [[ "$CHOICE" =~ ^[1-9]$ ]]; then
     MODEL="${MODELS[$((CHOICE - 1))]}"
-  elif [ "$CHOICE" = "9" ]; then
+  elif [ "$CHOICE" = "10" ]; then
     read -rp "Enter custom model (e.g. mistral:7b): " MODEL
     if [ -z "$MODEL" ]; then
       echo "No model entered. Exiting."

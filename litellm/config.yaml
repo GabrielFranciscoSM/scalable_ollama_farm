@@ -31,7 +31,7 @@ litellm_settings:
     port: 6379
     # Litellm usa por defecto coincidencia exacta;
     # lo siguiente es mas "real" pero mas pesado en hardware
-    # supported_caches: ["completion", "embeddings"]
+    supported_caches: ["completion", "embeddings"]
 
 router_settings:
   # routing_strategy: simple-shuffle

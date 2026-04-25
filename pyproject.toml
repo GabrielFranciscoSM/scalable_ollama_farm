@@ -1,0 +1,11 @@
+[project]
+name = "trabajo-grupal"
+version = "0.1.0"
+description = "Benchmarks for distributed LLM system"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.31.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "ipykernel>=6.0.0",
+]

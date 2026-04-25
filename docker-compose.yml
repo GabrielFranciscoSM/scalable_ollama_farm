@@ -26,13 +26,31 @@ services:
       - ollama:/root/.ollama
     restart: unless-stopped
 
+  ollama4:
+    image: ollama/ollama:latest
+    container_name: fase0-ollama4
+    ports:
+      - "11437:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+  ollama5:
+    image: ollama/ollama:latest
+    container_name: fase0-ollama5
+    ports:
+      - "11438:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
   redis:
     image: redis/redis-stack:latest
     container_name: fase0-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
-      # - "8001:8001"
+      - "8001:8001"
 
   litellm:
     image: ghcr.io/berriai/litellm:main-latest
@@ -47,12 +65,14 @@ services:
       - ollama1
       - ollama2
       - ollama3
+      - ollama4
+      - ollama5
       - redis
     environment:
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
       REDIS_URL: "redis://redis:6379"
     volumes:
-      - ./litellm/config.yaml:/app/config.yaml:ro
+      - ./litellm/configv2.yaml:/app/config.yaml:ro
     restart: unless-stopped
 
   nginx:
