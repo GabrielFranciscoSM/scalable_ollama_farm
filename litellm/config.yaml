@@ -3,19 +3,34 @@ model_list:
     litellm_params:
       model: ollama/qwen3.5:0.8b
       api_base: http://ollama1:11434
+      tpm: 1000
+      rpm: 10
 
   - model_name: local-chat
     litellm_params:
       model: ollama/qwen3.5:0.8b
       api_base: http://ollama2:11434
+      tpm: 1000
+      rpm: 10
 
   - model_name: local-chat
     litellm_params:
       model: ollama/qwen3.5:0.8b
       api_base: http://ollama3:11434
+      tpm: 1000
+      rpm: 10
 
 litellm_settings:
   drop_params: true
 
 router_settings:
-  routing_strategy: simple-shuffle
+  routing_strategy: least-busy
+  enable_pre_call_checks: true
+
+cache_config:
+  type: redis
+  host: redis
+  port: 6379
+  # Litellm usa por defecto coincidencia exacta;
+  # lo siguiente es mas "real" pero mas pesado en hardware
+  # supported_caches: ["completion", "embeddings"]
