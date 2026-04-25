@@ -25,6 +25,7 @@ litellm_settings:
   set_verbose: True
 
 router_settings:
+  # routing_strategy: simple-shuffle
   routing_strategy: least-busy
   enable_pre_call_checks: true
 
