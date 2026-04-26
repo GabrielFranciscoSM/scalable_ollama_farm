@@ -1,63 +1,48 @@
 model_list:
-  # Main Chat Model Pool
-  - model_name: local-chat
+  # ── Qwen3.5 0.8b via Ollama 1 ───────────────
+  - model_name: qwen3
     litellm_params:
       model: ollama/qwen3.5:0.8b
-      api_base: http://ollama1:11434
-      tpm: 100000 # Increased for 0.8b models
-      rpm: 1000
-  - model_name: local-chat
-    litellm_params:
-      model: ollama/qwen3.5:0.8b
-      api_base: http://ollama2:11434
-      tpm: 100000
-      rpm: 1000
-  - model_name: local-chat
-    litellm_params:
-      model: ollama/qwen3.5:0.8b
-      api_base: http://ollama3:11434
-      tpm: 100000
-      rpm: 1000
-  - model_name: local-chat
-    litellm_params:
-      model: ollama/qwen3.5:0.8b
-      api_base: http://ollama4:11434
-      tpm: 100000
-      rpm: 1000
+      api_base: http://ollama-1:11434
+      timeout: 60
+      stream_timeout: 120
 
-  # DEDICATED EMBEDDING MODEL (Required for Semantic Cache)
-  - model_name: semantic-embedder
+  # ── Qwen3.5 0.8b via Ollama 2 ───────────────
+  - model_name: qwen3
+    litellm_params:
+      model: ollama/qwen3.5:0.8b
+      api_base: http://ollama-2:11434
+      timeout: 60
+      stream_timeout: 120
+
+  # ── Nomic embed (for cache lookups) ─────────
+  - model_name: nomic-embed
     litellm_params:
       model: ollama/nomic-embed-text
-      api_base: http://ollama5:11434
-
-litellm_settings:
-  drop_params: true
-  set_verbose: false # Set to false in prod to save CPU/Logs
-  
-  # --- SEMANTIC CACHE CONFIG ---
-  cache: true
-  cache_type: redis-semantic
-  cache_config:
-    type: redis-semantic
-    host: redis
-    port: 6379
-    # Matches queries with >85% semantic similarity
-    similarity_threshold: 0.85
-    # The model used to turn prompts into vectors
-    redis_semantic_cache_embedding_model: semantic-embedder
-    ttl: 86400 # 24 hour cache
+      api_base: http://ollama-embed:11434
 
 router_settings:
   routing_strategy: least-busy
-  # Proactive HA: checks health in background, not during the user request
-  enable_pre_call_checks: true 
-  health_check_interval: 30
-  num_retries: 3
-  timeout: 10
-  # SHARED STATE: If you run multiple LiteLLM instances, they share RPM/TPM info here
-  redis_host: redis
-  redis_port: 6379
+  num_retries: 2
+  retry_after: 5
+  timeout: 30
+
+litellm_settings:
+  cache: true
+  cache_params:
+    type: redis-semantic
+    redis_url: redis://redis:6379
+    similarity_threshold: 0.85
+    # Must be the full provider/model string — the router is NOT available during cache init
+    redis_semantic_cache_embedding_model: ollama/nomic-embed-text
+    ttl: 3600
+
+  drop_params: true
+  request_timeout: 60
+  telemetry: false
+  success_callback: []
+  failure_callback: []
 
 general_settings:
-  master_key: sk-1234 # Secure your proxy
+  disable_spend_logs: true
+  disable_master_key_hashing: true
