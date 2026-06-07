@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Cache Benchmark</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif; background: #0f172a; color: #e2e8f0; padding: 24px; }
+h1 { font-size: 1.8rem; margin-bottom: 4px; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { color: #94a3b8; margin-bottom: 24px; font-size: 0.9rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.card { background: #1e293b; border-radius: 12px; padding: 16px; border: 1px solid #334155; text-align: center; }
+.card .val { font-size: 1.8rem; font-weight: 700; }
+.card .val.green { color: #4ade80; }
+.card .val.red { color: #f87171; }
+.card .val.blue { color: #38bdf8; }
+.card .val.amber { color: #fbbf24; }
+.card .label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+.chart-container { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; margin-bottom: 16px; }
+.chart-container h2 { font-size: 1rem; color: #f1f5f9; margin-bottom: 12px; }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .chart-row { grid-template-columns: 1fr; } }
+canvas { max-height: 400px; width: 100% !important; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th, td { padding: 6px 10px; text-align: left; border-bottom: 1px solid #334155; }
+th { color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; }
+td { color: #e2e8f0; }
+tr:hover td { background: #1e293b; }
+.status-hit { color: #4ade80; font-weight: 600; }
+.status-miss { color: #f87171; font-weight: 600; }
+.fp-warning { background: #451a03; border: 1px solid #92400e; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; }
+.fp-warning h3 { color: #fbbf24; font-size: 0.9rem; }
+.fp-warning p { color: #fcd34d; font-size: 0.82rem; margin-top: 4px; }
+.scroll-table { overflow-x: auto; }
+.paraphrase-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 1200px) { .paraphrase-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .paraphrase-grid { grid-template-columns: 1fr; } }
+.miss-row { color: #f87171; }
+.hit-row { color: #4ade80; }
+</style>
+</head>
+<body>
+
+<h1>Semantic Cache Benchmark</h1>
+<p class="subtitle">LiteLLM + Ollama + Redis — Resultados del experimento</p>
+
+<div class="cards" id="stats-cards"></div>
+
+<div class="fp-warning">
+  <h3>Falso positivo detectado</h3>
+  <p>"What is the boiling point of ethanol?" → <strong>HIT</strong> (31ms) — Similar a "What is the boiling point of water?" (MISS 5979ms). El threshold de similitud (0.85) podria necesitar ajuste.</p>
+</div>
+
+<div class="chart-row">
+  <div class="chart-container">
+    <h2>Latencia por grupo (HIT vs MISS)</h2>
+    <canvas id="chart-latency-group"></canvas>
+  </div>
+  <div class="chart-container">
+    <h2>Cache Hit Ratio por grupo</h2>
+    <canvas id="chart-hitratio"></canvas>
+  </div>
+</div>
+
+<div class="chart-row">
+  <div class="chart-container">
+    <h2>Distribucion de latencia</h2>
+    <canvas id="chart-distribution"></canvas>
+  </div>
+  <div class="chart-container">
+    <h2>Load Balancing</h2>
+    <canvas id="chart-loadbal"></canvas>
+  </div>
+</div>
+
+<div class="chart-container">
+  <h2>Todas las requests — Latencia por orden</h2>
+  <canvas id="chart-scatter"></canvas>
+</div>
+
+<div class="chart-container">
+  <h2>Detalle de Parafrasis — Aciertos por grupo</h2>
+  <div class="paraphrase-grid" id="paraphrase-tables"></div>
+</div>
+
+<div class="chart-container">
+  <h2>Resumen por grupo</h2>
+  <div class="scroll-table">
+    <table>
+      <thead>
+        <tr><th>Grupo</th><th>HIT</th><th>MISS</th><th>Hit Rate</th><th>Avg HIT (ms)</th><th>Avg MISS (ms)</th><th>Speedup</th></tr>
+      </thead>
+      <tbody id="group-table"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  "stats": {
+    "total": 89,
+    "hit_n": 33,
+    "miss_n": 56,
+    "hit_avg": 30.9,
+    "hit_med": 31,
+    "miss_avg": 5928.6,
+    "miss_med": 5924.5,
+    "speedup": 191.9,
+    "hit_pct": 37.1,
+    "miss_pct": 62.9,
+    "hit_min": 29,
+    "hit_max": 35,
+    "miss_min": 5762,
+    "miss_max": 6111
+  },
+  "groups": {
+    "Exact duplicates": {
+      "hit": 10,
+      "miss": 10,
+      "hit_lat": [
+        32,
+        30,
+        31,
+        30,
+        30,
+        29,
+        31,
+        35,
+        31,
+        30
+      ],
+      "miss_lat": [
+        5979,
+        5889,
+        5896,
+        5953,
+        6035,
+        5930,
+        6015,
+        5926,
+        5960,
+        5962
+      ]
+    },
+    "Paraphrase \u2014 Geography": {
+      "hit": 10,
+      "miss": 5,
+      "hit_lat": [
+        30,
+        31,
+        31,
+        30,
+        32,
+        31,
+        30,
+        32,
+        31,
+        30
+      ],
+      "miss_lat": [
+        5903,
+        5894,
+        5882,
+        6041,
+        6029
+      ]
+    },
+    "Paraphrase \u2014 Science": {
+      "hit": 4,
+      "miss": 11,
+      "hit_lat": [
+        30,
+        32,
+        31,
+        32
+      ],
+      "miss_lat": [
+        5820,
+        5898,
+        5863,
+        5957,
+        5875,
+        5851,
+        5869,
+        5898,
+        6030,
+        5990,
+        5881
+      ]
+    },
+    "Paraphrase \u2014 History & Arts": {
+      "hit": 8,
+      "miss": 7,
+      "hit_lat": [
+        31,
+        30,
+        30,
+        31,
+        29,
+        31,
+        32,
+        32
+      ],
+      "miss_lat": [
+        5997,
+        6044,
+        5983,
+        5858,
+        5889,
+        5958,
+        5923,
+        6045
+      ]
+    },
+    "Related but distinct": {
+      "hit": 0,
+      "miss": 9,
+      "hit_lat": [],
+      "miss_lat": [
+        5822,
+        5967,
+        5988,
+        5930,
+        5992,
+        5926,
+        5892,
+        5919,
+        5905
+      ]
+    },
+    "Unrelated (cross-check)": {
+      "hit": 1,
+      "miss": 4,
+      "hit_lat": [
+        31
+      ],
+      "miss_lat": [
+        5784,
+        5762,
+        5978
+      ]
+    },
+    "Load balancing probe": {
+      "hit": 0,
+      "miss": 10,
+      "hit_lat": [],
+      "miss_lat": [
+        5875,
+        5903,
+        6057,
+        6111,
+        5865,
+        5832,
+        5957,
+        5831,
+        5951,
+        5834
+      ]
+    }
+  },
+  "paraphrase_detail": {
+    "Geography": {
+      "topics": [
+        {
+          "q": "What is the capital of France?",
+          "result": "MISS",
+          "lat": 5903
+        },
+        {
+          "q": "What is the capital city of France?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "Which city serves as the capital of France?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "What is the longest river in the world?",
+          "result": "MISS",
+          "lat": 5894
+        },
+        {
+          "q": "Which river is the longest in the world?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "What is the world's longest river?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "How many continents are there on Earth?",
+          "result": "MISS",
+          "lat": 5882
+        },
+        {
+          "q": "What is the number of continents on Earth?",
+          "result": "HIT",
+          "lat": 32
+        },
+        {
+          "q": "How many continents exist on Earth?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "What is the largest ocean on Earth?",
+          "result": "MISS",
+          "lat": 6041
+        },
+        {
+          "q": "Which ocean is the largest on Earth?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "What is the biggest ocean in the world?",
+          "result": "HIT",
+          "lat": 32
+        },
+        {
+          "q": "What is the tallest mountain in the world?",
+          "result": "MISS",
+          "lat": 6029
+        },
+        {
+          "q": "Which mountain is the highest on Earth?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "What is the highest peak in the world?",
+          "result": "HIT",
+          "lat": 32
+        }
+      ]
+    },
+    "Science": {
+      "topics": [
+        {
+          "q": "How does photosynthesis work?",
+          "result": "MISS",
+          "lat": 5820
+        },
+        {
+          "q": "Explain the process of photosynthesis",
+          "result": "MISS",
+          "lat": 5898
+        },
+        {
+          "q": "What happens during photosynthesis?",
+          "result": "MISS",
+          "lat": 5863
+        },
+        {
+          "q": "How many planets are in our solar system?",
+          "result": "MISS",
+          "lat": 5957
+        },
+        {
+          "q": "What is the number of planets orbiting the sun?",
+          "result": "MISS",
+          "lat": 5875
+        },
+        {
+          "q": "How many planets orbit our sun?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "What is gravity?",
+          "result": "MISS",
+          "lat": 5851
+        },
+        {
+          "q": "How does gravity work?",
+          "result": "MISS",
+          "lat": 5869
+        },
+        {
+          "q": "What force pulls objects toward Earth?",
+          "result": "MISS",
+          "lat": 5898
+        },
+        {
+          "q": "What gas do plants absorb from the atmosphere?",
+          "result": "MISS",
+          "lat": 6030
+        },
+        {
+          "q": "Which gas do plants take in from the air?",
+          "result": "HIT",
+          "lat": 32
+        },
+        {
+          "q": "What gas is absorbed by plants during photosynthesis?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "How does sound travel?",
+          "result": "MISS",
+          "lat": 5990
+        },
+        {
+          "q": "How does sound propagate through air?",
+          "result": "MISS",
+          "lat": 5881
+        },
+        {
+          "q": "What is the mechanism by which sound travels?",
+          "result": "HIT",
+          "lat": 32
+        }
+      ]
+    },
+    "History & Arts": {
+      "topics": [
+        {
+          "q": "Who painted the Mona Lisa?",
+          "result": "MISS",
+          "lat": 5997
+        },
+        {
+          "q": "Who was the artist of the Mona Lisa?",
+          "result": "MISS",
+          "lat": 6044
+        },
+        {
+          "q": "Who created the Mona Lisa painting?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "When did World War II end?",
+          "result": "MISS",
+          "lat": 5983
+        },
+        {
+          "q": "What year did World War II end?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "When was the end of World War II?",
+          "result": "HIT",
+          "lat": 30
+        },
+        {
+          "q": "Who wrote Romeo and Juliet?",
+          "result": "MISS",
+          "lat": 5858
+        },
+        {
+          "q": "Who was the author of Romeo and Juliet?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "Who penned Romeo and Juliet?",
+          "result": "HIT",
+          "lat": 29
+        },
+        {
+          "q": "What is the Great Wall of China?",
+          "result": "HIT",
+          "lat": 31
+        },
+        {
+          "q": "Describe the Great Wall of China",
+          "result": "MISS",
+          "lat": 5889
+        },
+        {
+          "q": "What is the Great Wall of China made of?",
+          "result": "MISS",
+          "lat": 5958
+        },
+        {
+          "q": "Who discovered penicillin?",
+          "result": "MISS",
+          "lat": 5923
+        },
+        {
+          "q": "Who discovered the antibiotic penicillin?",
+          "result": "HIT",
+          "lat": 32
+        },
+        {
+          "q": "Who is credited with discovering penicillin?",
+          "result": "HIT",
+          "lat": 32
+        }
+      ]
+    }
+  }
+};
+
+function avg(arr) { return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
+function median(arr) { if(!arr.length) return 0; const s=[...arr].sort((a,b)=>a-b); const m=Math.floor(s.length/2); return s.length%2?s[m]:(s[m-1]+s[m])/2; }
+
+(function() {
+  const s = DATA.stats;
+  const cards = [
+    { val: s.total, label: 'Total Requests', cls: 'blue' },
+    { val: s.hit_n, label: 'Cache HITS', cls: 'green' },
+    { val: s.miss_n, label: 'Cache MISS', cls: 'red' },
+    { val: s.hit_avg + 'ms', label: 'HIT avg latency', cls: 'green' },
+    { val: s.miss_avg + 'ms', label: 'MISS avg latency', cls: 'red' },
+    { val: s.speedup + 'x', label: 'Speedup', cls: 'amber' },
+    { val: s.hit_pct + '%', label: 'Hit Rate', cls: 'blue' },
+  ];
+  document.getElementById('stats-cards').innerHTML = cards.map(c =>
+    '<div class="card"><div class="val ' + c.cls + '">' + c.val + '</div><div class="label">' + c.label + '</div></div>'
+  ).join('');
+})();
+
+(function() {
+  const groups = DATA.groups;
+  document.getElementById('group-table').innerHTML = Object.entries(groups).map(([name, g]) => {
+    const hit_rate = g.hit + g.miss > 0 ? (g.hit / (g.hit + g.miss) * 100).toFixed(0) : '0';
+    const avg_hit = avg(g.hit_lat).toFixed(0);
+    const avg_miss = avg(g.miss_lat).toFixed(0);
+    const sp = avg_miss > 0 && avg_hit > 0 ? (avg_miss / avg_hit).toFixed(1) : '—';
+    return '<tr><td>' + name + '</td><td>' + g.hit + '</td><td>' + g.miss + '</td><td>' + hit_rate + '%</td><td>' + avg_hit + '</td><td>' + avg_miss + '</td><td>' + sp + 'x</td></tr>';
+  }).join('');
+})();
+
+(function() {
+  const groups = DATA.groups;
+  const labels = Object.keys(groups);
+  const hitAvgs = labels.map(k => avg(groups[k].hit_lat));
+  const missAvgs = labels.map(k => avg(groups[k].miss_lat));
+  new Chart(document.getElementById('chart-latency-group'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'HIT (ms)', data: hitAvgs, backgroundColor: '#4ade8088', borderColor: '#4ade80', borderWidth: 1 },
+        { label: 'MISS (ms)', data: missAvgs, backgroundColor: '#f8717188', borderColor: '#f87171', borderWidth: 1 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#94a3b8' } } },
+      scales: {
+        x: { ticks: { color: '#94a3b8', maxRotation: 45 } },
+        y: { beginAtZero: true, ticks: { color: '#94a3b8' } },
+      }
+    }
+  });
+})();
+
+(function() {
+  const groups = DATA.groups;
+  const labels = Object.keys(groups);
+  const hitRates = labels.map(k => {
+    const g = groups[k];
+    return g.hit + g.miss > 0 ? (g.hit / (g.hit + g.miss) * 100) : 0;
+  });
+  new Chart(document.getElementById('chart-hitratio'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ label: 'Hit Rate (%)', data: hitRates, backgroundColor: hitRates.map(r => r > 50 ? '#4ade8088' : '#f8717188'), borderColor: hitRates.map(r => r > 50 ? '#4ade80' : '#f87171'), borderWidth: 1 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8', callback: v => v + '%' } },
+        y: { ticks: { color: '#94a3b8' } }
+      }
+    }
+  });
+})();
+
+(function() {
+  const bins = [0, 25, 30, 35, 40, 50, 1000, 3000, 5000, 5500, 5750, 5850, 5950, 6050, 6150];
+  const labels = bins.slice(0, -1).map((v,i) => v + '-' + bins[i+1]);
+  function binData(arr) {
+    return bins.slice(0, -1).map((v,i) => arr.filter(x => x >= v && x < bins[i+1]).length);
+  }
+  const allHit = Object.values(DATA.groups).flatMap(g => g.hit_lat);
+  const allMiss = Object.values(DATA.groups).flatMap(g => g.miss_lat);
+  new Chart(document.getElementById('chart-distribution'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'HIT', data: binData(allHit), backgroundColor: '#4ade8088', borderColor: '#4ade80', borderWidth: 1 },
+        { label: 'MISS', data: binData(allMiss), backgroundColor: '#f8717188', borderColor: '#f87171', borderWidth: 1 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#94a3b8' } } },
+      scales: {
+        x: { ticks: { color: '#94a3b8', maxRotation: 45 } },
+        y: { beginAtZero: true, ticks: { color: '#94a3b8' } },
+      }
+    }
+  });
+})();
+
+(function() {
+  new Chart(document.getElementById('chart-loadbal'), {
+    type: 'doughnut',
+    data: {
+      labels: ['ollama-1', 'ollama-2'],
+      datasets: [{
+        data: [45, 44],
+        backgroundColor: ['#38bdf888', '#818cf888'],
+        borderColor: ['#38bdf8', '#818cf8'],
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+    }
+  });
+})();
+
+(function() {
+  const hitPoints = [];
+  const missPoints = [];
+  let idx = 0;
+  Object.entries(DATA.groups).forEach(([group, g]) => {
+    g.hit_lat.forEach(l => { hitPoints.push({x: idx++, y: l, group}); });
+    g.miss_lat.forEach(l => { missPoints.push({x: idx++, y: l, group}); });
+  });
+  new Chart(document.getElementById('chart-scatter'), {
+    type: 'scatter',
+    data: {
+      datasets: [
+        { label: 'HIT', data: hitPoints, backgroundColor: '#4ade80', pointRadius: 4 },
+        { label: 'MISS', data: missPoints, backgroundColor: '#f87171', pointRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#94a3b8' } } },
+      scales: {
+        x: { title: { display: true, text: 'Request #', color: '#94a3b8' }, ticks: { color: '#94a3b8' } },
+        y: { title: { display: true, text: 'Latency (ms)', color: '#94a3b8' }, ticks: { color: '#94a3b8' } },
+      }
+    }
+  });
+})();
+
+(function() {
+  const container = document.getElementById('paraphrase-tables');
+  container.innerHTML = Object.entries(DATA.paraphrase_detail).map(([cat, data]) => {
+    return '<div style="background:#0f172a;border-radius:8px;padding:12px;border:1px solid #334155;">'
+      + '<h3 style="color:#38bdf8;font-size:0.85rem;margin-bottom:8px;">' + cat + '</h3>'
+      + '<table><thead><tr><th>Prompt</th><th>Result</th><th>Lat (ms)</th></tr></thead><tbody>'
+      + data.topics.map(t =>
+        '<tr class="' + (t.result === 'HIT' ? 'hit-row' : 'miss-row') + '">'
+        + '<td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + t.q.replace(/"/g, '&quot;') + '">' + t.q + '</td>'
+        + '<td class="status-' + t.result.toLowerCase() + '">' + t.result + '</td>'
+        + '<td>' + t.lat + '</td></tr>'
+      ).join('')
+      + '</tbody></table></div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
