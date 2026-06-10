@@ -199,11 +199,13 @@ model_list:
       model: ollama/qwen3.5:0.8b
       api_base: http://ollama-1:11434
       timeout: 60
+      stream_timeout: 120
   - model_name: qwen3
     litellm_params:
       model: ollama/qwen3.5:0.8b
       api_base: http://ollama-2:11434
       timeout: 60
+      stream_timeout: 120
   - model_name: ollama/nomic-embed-text
     litellm_params:
       model: ollama/nomic-embed-text
@@ -213,6 +215,7 @@ router_settings:
   routing_strategy: simple-shuffle
   num_retries: 2
   retry_after: 5
+  timeout: 30
 
 litellm_settings:
   cache: true
@@ -224,7 +227,12 @@ litellm_settings:
     vector_size: 768
     ttl: 3600
   drop_params: true
+  request_timeout: 60
   telemetry: false
+
+general_settings:
+  disable_spend_logs: true
+  disable_master_key_hashing: true
 \end{lstlisting}
 
 Los parámetros clave del caché semántico son:
@@ -317,8 +325,8 @@ La Tabla~\ref{tab:resultados} resume los resultados agregados por grupo experime
         \midrule
         Duplicados exactos      & 20 & 10 & 10 & 100\,\% \\
         Paráfrasis Geografía    & 15 & 10 & 10 & 100\,\% \\
-        Paráfrasis Ciencia      & 15 & 10 &  5 &  50\,\% \\
-        Paráfrasis Historia     & 15 & 10 &  8 &  80\,\% \\
+        Paráfrasis Ciencia      & 15 & 10 &  4 &  40\,\% \\
+        Paráfrasis Historia     & 15 & 10 &  7 &  70\,\% \\
         Relacionados distintos  &  9 &  0 &  0 &   0\,\% \\
         No relacionados         &  5 &  0 &  1 & ---    \\
         Balanceo de carga       & 10 &  0 &  0 & ---    \\
@@ -361,7 +369,7 @@ La Tabla~\ref{tab:resultados} resume los resultados agregados por grupo experime
 
 \textbf{Caché exacto (100\,\% de acierto).} Las 10 preguntas repetidas de forma idéntica en el grupo de duplicados exactos obtuvieron HIT en su segunda aparición sin excepción. Esto confirma que el flujo básico de almacenamiento y recuperación del caché funciona correctamente.
 
-\textbf{Caché semántico sobre paráfrasis.} El rendimiento varía según el dominio. En Geografía, las 10 paráfrasis esperadas se detectaron correctamente (100\,\%). En Historia y Arte, 8 de 10 (80\,\%). Sin embargo, en Ciencia solo se detectaron 5 de 10 (50\,\%). Los falsos negativos se concentran en preguntas como las relativas a la fotosíntesis (\textit{``How does photosynthesis work?''} vs. \textit{``Explain the process of photosynthesis''}) o la gravedad (\textit{``What is gravity?''} vs. \textit{``How does gravity work?''}), donde el modelo de embeddings no asigna suficiente similitud coseno a pesar de la equivalencia semántica. Esto sugiere que el umbral 0.85 puede ser demasiado restrictivo para ciertos dominios.
+\textbf{Caché semántico sobre paráfrasis.} El rendimiento varía según el dominio. En Geografía, las 10 paráfrasis esperadas se detectaron correctamente (100\,\%). En Historia y Arte, 7 de 10 (70\,\%); adicionalmente se produjo un falso positivo en la primera pregunta de la Gran Muralla China (\textit{``What is the Great Wall of China?''}), que acertó en caché sin haber sido formulada antes. En Ciencia solo se detectaron 4 de 10 (40\,\%). Los falsos negativos se concentran en preguntas como las relativas a la fotosíntesis (\textit{``How does photosynthesis work?''} vs.~\textit{``Explain the process of photosynthesis''}) o la gravedad (\textit{``What is gravity?''} vs.~\textit{``How does gravity work?''}), donde el modelo de embeddings no asigna suficiente similitud coseno a pesar de la equivalencia semántica. Esto sugiere que el umbral 0.85 puede ser demasiado restrictivo para ciertos dominios.
 
 \textbf{Falsos positivos.} Se detectó un único falso positivo en el grupo de no relacionados: la pregunta \textit{``What is the boiling point of ethanol?''} obtuvo HIT, probablemente por similitud con la pregunta \textit{``What is the boiling point of water?''} del grupo de duplicados exactos. Este caso ilustra el compromiso inherente al caché semántico: umbrales más bajos mejoran la tasa de acierto en paráfrasis a costa de aumentar los falsos positivos.
 
@@ -380,7 +388,7 @@ Los resultados experimentales demuestran que:
 \begin{itemize}
     \item El caché semántico proporciona una aceleración de \textbf{191.5$\times$} en latencia para preguntas repetidas o parafraseadas (31~ms frente a 5929~ms), eliminando la necesidad de ejecutar inferencia redundante.
     
-    \item La detección de paráfrasis funciona correctamente en dominios con vocabulario bien diferenciado (Geografía, 100\,\%; Historia, 80\,\%), aunque presenta limitaciones en dominios técnicos como Ciencias (50\,\%).
+    \item La detección de paráfrasis funciona correctamente en dominios con vocabulario bien diferenciado (Geografía, 100\,\%; Historia, 70\,\%), aunque presenta limitaciones en dominios técnicos como Ciencias (40\,\%).
     
     \item El balanceo de carga mediante \texttt{simple-shuffle} distribuye las peticiones de forma equitativa (51\,\%/49\,\%) sin necesidad de lógica compleja.
     
