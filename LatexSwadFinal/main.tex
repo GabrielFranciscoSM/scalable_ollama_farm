@@ -3,13 +3,13 @@
 \documentclass[letterpaper,11pt]{article} %Modifica el tipo de documento y el tamaño de la letra.
 \usepackage[utf8]{inputenc} %Formato UTF-8 para caracteres especiales.
 \usepackage[
-  style = ieee,
-  backend = biber,
-  url=true, 
-  isbn = false,
-  maxbibnames = 6, % Número máximo de autores que pueden aparecer en una referencia (6)
-  minnames=1,
-  citestyle=numeric] % Número mínimo de autores que aparecerán al truncar: autor1 et al.
+    style = ieee,
+    backend = biber,
+    url=true, 
+    isbn = false,
+    maxbibnames = 6, % Número máximo de autores que pueden aparecer en una referencia (6)
+    minnames=1,
+    citestyle=numeric] % Número mínimo de autores que aparecerán al truncar: autor1 et al.
 {biblatex}
 
 \addbibresource{referencias.bib}
@@ -29,8 +29,8 @@
 }
 \lstdefinelanguage{docker-compose}{
     keywords={version, services, volumes, networks, build, image, ports, environment,
-     container_name, depends_on, command, driver, name, ipam, config, subnet, context,
-     dockerfile, ipv4_address},
+    container_name, depends_on, command, driver, name, ipam, config, subnet, context,
+    dockerfile, ipv4_address},
     keywordstyle=\color{blue}\bfseries,
     comment=[l]{\#},
     commentstyle=\color{green}\ttfamily,
@@ -70,41 +70,41 @@
 }
 
 \lstdefinelanguage{HTML5}{
-  language=html,
-  sensitive=true,
-  alsoletter={<>=-},
-  morecomment=[s]{<!-}{-->},
-  tag=[s],
-  otherkeywords={
-    % General
-    >,
-    % Standard tags
-    <!DOCTYPE, </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
-    % body
-    </body, <body,
-    % Divs
-    </div, <div, </div>,
-    % Paragraphs
-    </p, <p, </p>,
-    % scripts
-    </script, <script,
-    % More tags...
-    <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
-  },
-  ndkeywords={
-    % General
-    =,
-    % HTML attributes
-    charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
-    % SVG attributes
-    fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
-    % properties
-    margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
-    % CSS3 properties
-    transform:, -moz-transform:, -webkit-transform:,
-    animation:, -webkit-animation:,
-    transition:, transition-duration:, transition-property:, transition-timing-function:
-  }
+    language=html,
+    sensitive=true,
+    alsoletter={<>=-},
+    morecomment=[s]{<!-}{-->},
+    tag=[s],
+    otherkeywords={
+        % General
+        >,
+        % Standard tags
+        <!DOCTYPE, </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+        % body
+        </body, <body,
+        % Divs
+        </div, <div, </div>,
+        % Paragraphs
+        </p, <p, </p>,
+        % scripts
+        </script, <script,
+        % More tags...
+        <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
+    },
+    ndkeywords={
+        % General
+        =,
+        % HTML attributes
+        charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+        % SVG attributes
+        fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+        % properties
+        margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+        % CSS3 properties
+        transform:, -moz-transform:, -webkit-transform:,
+        animation:, -webkit-animation:,
+        transition:, transition-duration:, transition-property:, transition-timing-function:
+    }
 }
 
 
@@ -126,6 +126,7 @@
 \usepackage{parskip}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta}
 \usepackage{lipsum}
 \usepackage{wrapfig} %texto alrededor de Images \begin{wrapfigure}{alignment}{width}
 \usepackage{xlop}	%divisiones con caja \opidiv{316}{50}
@@ -270,4 +271,4 @@
 
 \end{document}
 
- %Fin del documento.
+%Fin del documento.
