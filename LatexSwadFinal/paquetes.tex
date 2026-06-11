@@ -1,0 +1,73 @@
+% Inicio del preámbulo
+
+\documentclass[a4paper,11pt]{article} %Modifica el tipo de documento y el tamaño de la letra.
+\usepackage{fontspec}
+\usepackage{setspace}
+\setmainfont{Times New Roman}
+\usepackage{titlesec}
+%\setmainfont{Arial}
+\usepackage[utf8]{inputenc} %Formato UTF-8 para caracteres especiales.
+\singlespacing
+\usepackage{lmodern}
+\usepackage[
+  style = ieee,
+  backend = biber,
+  url=true,  
+  isbn = false,
+  maxbibnames = 6, % Número máximo de autores que pueden aparecer en una referencia (6)
+  minnames=1,
+  citestyle=numeric] % Número mínimo de autores que aparecerán al truncar: autor1 et al.
+{biblatex}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{listings}
+
+\usepackage[a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath,amssymb,amsfonts,latexsym,cancel}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage[rflt]{floatflt}
+%\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage{fancyhdr} %Paquete para el header y el formato de la portada. No sugiero borrarlo!
+\usepackage{float}
+\usepackage{longtable,multirow,booktabs}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{adjustbox}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, shapes, calc}
+\usepackage{lipsum}
+\usepackage{wrapfig} %texto alrededor de Images \begin{wrapfigure}{alignment}{width}
+\usepackage{xlop}	%divisiones con caja \opidiv{316}{50}
+
+\usepackage{multicol} %varias columnas
+
+
+\usepackage{textcomp}   %poner símbolo copyright
+
+\usepackage{endnotes}
+
+
+% Para hacer recuadros
+% https://ondahostil.wordpress.com/2017/05/17/lo-que-he-aprendido-cuadros-de-texto-de-colores-en-latex/
+\usepackage{tcolorbox}
+
+%%% Matemáticas Paquetes AMS
+\usepackage{amsfonts}
+\usepackage{amsmath} % Matemáticas
+\usepackage{amssymb,amsthm} % Símbolos y teoremas
+\usepackage{mathtools} % % Algunos añadidos y correcciones a amsmath
+\usepackage{upgreek} % Letras griegas
+\usepackage{esvect}
+\usepackage{dsfont} % Conjunto unario
+\usepackage{multirow} % Tablas con casillas de varias alturas
+
+%Fin de Préambulo

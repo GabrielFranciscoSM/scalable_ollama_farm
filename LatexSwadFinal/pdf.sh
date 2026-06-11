@@ -23,14 +23,16 @@ while getopts "hrsm:" opt; do
 done
 
 if [[ "$borrar_logs" -eq "1" ]]; then
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
     biber $archivo
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+
     ls | grep -P "$archivo\.(?!(pdf|tex)$)" | xargs rm #-v
 else
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error -recorder  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error -recorder  "./$archivo.tex"
     biber $archivo
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
-    pdflatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+    xelatex  -synctex=1 -interaction=$interactivo -file-line-error  "./$archivo.tex"
+
 fi

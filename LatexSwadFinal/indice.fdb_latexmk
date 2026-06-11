@@ -1,0 +1,9 @@
+# Fdb version 4
+["lualatex"] 0 "indice.tex" "indice.pdf" "indice" 0 -1
+  "indice.aux" 0 -1 0 "lualatex"
+  "indice.tex" 0 -1 0 ""
+  (generated)
+  "indice.aux"
+  "indice.log"
+  "indice.pdf"
+  (rewritten before read)

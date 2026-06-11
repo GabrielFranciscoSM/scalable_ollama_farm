@@ -1,3 +1,113 @@
+% \section{Introducción}
+%Se pretende desarrollar una granja de modelos de IA con métodos de 
+%escalabilidad y disponibilidad 
+
+% \lstinputlisting[    language=Dockerfile,
+%     basicstyle=\ttfamily\small,
+%     keywordstyle=\color{blue}\bfseries,
+%     commentstyle=\color{purple},
+%     stringstyle=\color{red},
+%     backgroundcolor=\color{gray!10},
+%     frame=single,
+%     breaklines=true,
+%     numbers=left,
+%     numberstyle=\tiny\color{gray},
+%     tabsize=2,
+%     texcl=true]{/home/manuadmin/P5/P5-ab/DockerFileAb}
+
+% \lstinputlisting[    language=bash,
+%     basicstyle=\ttfamily\small,
+%     keywordstyle=\color{blue}\bfseries,
+%     commentstyle=\color{purple},
+%     stringstyle=\color{red},
+%     backgroundcolor=\color{gray!10},
+%     frame=single,
+%     breaklines=true,
+%     numbers=left,
+%     numberstyle=\tiny\color{gray},
+%     tabsize=2, 
+%     firstline=49,
+%     lastline=59,
+%     texcl=true]{/home/manuadmin/P5/logdLocust.txt}
+
+% \lstinputlisting[
+%     language=configure2,
+%     frame=single,
+%     firstline=14,
+%     lastline=17,
+%     texcl=true]{/home/manuadmin/P5/P5-granjaWordpress/P4-manuel100-nginx/manuel100-nginx-ssl.conf}
+    
+% \begin{figure}[H]
+%     \centering
+%     % Primera subfigura
+%     \begin{subfigure}[H]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{Images/imagen_20.png}
+%         \caption{Configuramos la cuenta de administración.}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[H]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{Images/imagen_21.png}
+%         \caption{Accedemos exitosamente al `home'.}
+%     \end{subfigure}
+% \end{figure}
+
+% Nuestra intención con este trabajo es hacer uso de lo aprendido a lo largo
+% de la asignatura, combinándolo con la técnología en auge actualmente, 
+% los modelos de Inteligencia Artificial. 
+ 
+% Pretendemos disponer de varios modelos en una granja web con Docker que 
+% combinen su información y se complementen, mejorando su utilidad individual.
+% Para ello necesitaremos hacer uso de un sistema con balanceador personalizado,
+% y pretendemos incorporar un sistema de caché léxico que el propio balanceador 
+% gestionará para mejorar la eficiencia de la granja.
+
+% Además, el sistema será accesible desde un dominio gratuito y traves de la 
+% gestión del router. Analizaremos el rendimiento de múltiples maneras, y 
+% compararemos la información obtenida para localizar posibles deficiencias o 
+% mejoras que se podrían plantear al servicio.
+
+% Todo esto con la finalidad de recabar experiencia y un proyecto propio que
+% sirva de punto de partida o referencia para un servicio similar.
+
+% Este trabajo presenta el diseño e implementación de una granja local de modelos de lenguaje basada en contenedores. La solución busca ofrecer un entorno reproducible, escalable y orientado a la disponibilidad para servir modelos LLM en equipos modestos, priorizando la estabilidad frente al rendimiento máximo.
+
+% \section{Antecedentes y conceptos previos}
+% En esta sección se introducen los conceptos necesarios para comprender el proyecto: inferencia local con Ollama, enrutamiento mediante LiteLLM, proxy inverso con Nginx y almacenamiento temporal con Redis. También se revisan ideas como escalabilidad horizontal, balanceo de carga y caché semántica.
+
+% \section{Objetivos}
+% \subsection{Objetivo general}
+% Diseñar y validar una infraestructura local para servir modelos LLM mediante Docker Compose, con posibilidad de escalado y mejora de disponibilidad.
+
+% \subsection{Objetivos específicos}
+% \begin{itemize}
+%     \item Desplegar uno o varios nodos de inferencia con Ollama.
+%     \item Definir un punto único de acceso mediante proxy o gateway.
+%     \item Integrar Redis como soporte para caché semántica.
+%     \item Medir latencia, throughput y comportamiento con y sin caché.
+%     \item Documentar la arquitectura y las decisiones técnicas adoptadas.
+% \end{itemize}
+
+% \section{Arquitectura propuesta}
+% Se describe la solución formada por cliente, proxy de entrada, nodos Ollama, Redis y scripts de despliegue. También se explica el flujo de una petición desde el cliente hasta la generación de la respuesta.
+
+% \section{Desarrollo y análisis}
+% \subsection{Despliegue con Docker Compose}
+% Aquí se detallan los servicios definidos en \texttt{docker-compose.yml}, las redes, los volúmenes y las variables de entorno.
+
+% \subsection{Configuración de los componentes}
+% Se explica la configuración de Ollama, LiteLLM, Nginx y Redis, así como los scripts auxiliares de inicialización.
+
+% \subsection{Estrategia de caché}
+% Se describe el mecanismo utilizado para almacenar y recuperar respuestas frecuentes, incluyendo claves, TTL y criterios de coincidencia.
+
+% \section{Pruebas y resultados}
+% Se presentan los experimentos realizados, los casos de prueba y las métricas obtenidas. Se comparan los escenarios con y sin caché, y se analizan los resultados.
+
+% \section{Conclusiones}
+% Se resumen los logros alcanzados, las limitaciones del sistema y posibles mejoras futuras.
+
 \section{Introducción}
 
 Los grandes modelos de lenguaje (LLM, por sus siglas en inglés) han transformado la manera en que interactuamos con la información. Sin embargo, servirlos de forma eficiente presenta desafíos significativos: la latencia de inferencia es alta (en CPU puede superar los 6 segundos por petición), una única instancia es un punto único de fallo, y sin mecanismos de memorización se repite trabajo ya realizado ante preguntas idénticas o similares.
@@ -85,10 +195,10 @@ La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las
     \centering
     \shorthandoff{>}\shorthandoff{<}
     \begin{tikzpicture}[
-        node distance=2.2cm and 2.8cm,
+        node distance=1.8cm and 1.2cm,
         box/.style={rectangle, draw=black!60, fill=black!5, very thick, minimum width=2.8cm, minimum height=1cm, align=center},
         db/.style={cylinder, draw=black!60, fill=black!5, very thick, minimum width=2cm, minimum height=1cm, align=center, shape border rotate=90},
-        arrow/.style={-stealth, thick},
+        arrow/.style={-stealth, thick}
     ]
         \node[box, fill=color5!30] (cliente) {Cliente\\externo};
         
@@ -108,7 +218,7 @@ La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las
         \draw[arrow] (litellm) -- (redis) node[midway, right, font=\footnotesize] {cache};
         \draw[arrow] (litellm) -- (ollama1) node[midway, left, font=\footnotesize] {infer};
         \draw[arrow] (litellm) -- (ollama2) node[midway, right, font=\footnotesize] {infer};
-        \draw[arrow] (litellm) -- (ollamaEmb) node[midway, right, font=\footnotesize] {embed};
+        \draw[arrow] (litellm) -- (ollamaEmb) node[midway, right, yshift=2.5cm, font=\footnotesize] {embed};
         \draw[arrow, densely dashed] (redis) -- (ollamaEmb);
     \end{tikzpicture}
     \caption{Arquitectura del sistema: flujo de peticiones entre componentes.}
@@ -176,7 +286,18 @@ services:
 
 Cada instancia de Ollama define un \texttt{entrypoint} personalizado (Listado~\ref{lst:ollamainit}) que ejecuta el servidor Ollama en segundo plano y, tras una breve pausa, descarga el modelo requerido mediante \texttt{ollama pull}. El modelo queda persistido en un volumen con nombre, por lo que reinicios posteriores del contenedor no necesitan volver a descargarlo.
 
-\begin{lstlisting}[language=bash, caption=Script de inicialización de Ollama (inferencia), label=lst:ollamainit]
+\begin{lstlisting}[    language=bash,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{purple},
+    stringstyle=\color{red},
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    tabsize=2, 
+ caption=Script de inicialización de Ollama (inferencia), label=lst:ollamainit]
 #!/bin/sh
 set -e
 echo "[ollama-init] Pulling qwen3.5:0.8b ..."
@@ -426,3 +547,4 @@ A partir de los resultados obtenidos, se identifican las siguientes líneas de m
     
     \item \textbf{Caché distribuido}: en un despliegue con múltiples nodos, utilizar Redis Cluster para que el caché semántico sea compartido entre todas las instancias del \textit{gateway}.
 \end{enumerate}
+

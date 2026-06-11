@@ -1,0 +1,204 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{dockerOverview}{online}{}
+      \list{organization}{1}{%
+        {Docker Inc.}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Docker overview}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://docs.docker.com/get-started/docker-overview/
+      \endverb
+      \verb{url}
+      \verb https://docs.docker.com/get-started/docker-overview/
+      \endverb
+    \endentry
+    \entry{dockerComposeSpec}{online}{}
+      \list{organization}{1}{%
+        {Docker Inc.}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Compose Specification}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://docs.docker.com/reference/compose-file/
+      \endverb
+      \verb{url}
+      \verb https://docs.docker.com/reference/compose-file/
+      \endverb
+    \endentry
+    \entry{ollama}{online}{}
+      \list{organization}{1}{%
+        {Ollama}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Ollama --- Get up and running with large language models}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://ollama.com/
+      \endverb
+      \verb{url}
+      \verb https://ollama.com/
+      \endverb
+    \endentry
+    \entry{qwenModel}{online}{}
+      \list{organization}{1}{%
+        {Alibaba Cloud}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Qwen3.5 --- Model Card}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://ollama.com/library/qwen3.5
+      \endverb
+      \verb{url}
+      \verb https://ollama.com/library/qwen3.5
+      \endverb
+    \endentry
+    \entry{nomicEmbed}{online}{}
+      \list{organization}{1}{%
+        {Nomic AI}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{nomic-embed-text --- Model Card}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://ollama.com/library/nomic-embed-text
+      \endverb
+      \verb{url}
+      \verb https://ollama.com/library/nomic-embed-text
+      \endverb
+    \endentry
+    \entry{litellm}{online}{}
+      \list{organization}{1}{%
+        {BerriAI}%
+      }
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{LiteLLM --- Call all LLM APIs using the OpenAI format}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://docs.litellm.ai/
+      \endverb
+      \verb{url}
+      \verb https://docs.litellm.ai/
+      \endverb
+    \endentry
+    \entry{litellmSemanticCache}{online}{}
+      \list{organization}{1}{%
+        {BerriAI}%
+      }
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Redis Semantic Cache --- LiteLLM Documentation}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://docs.litellm.ai/docs/caching/redis_cache
+      \endverb
+      \verb{url}
+      \verb https://docs.litellm.ai/docs/caching/redis_cache
+      \endverb
+    \endentry
+    \entry{redisStack}{online}{}
+      \list{organization}{1}{%
+        {Redis Ltd.}%
+      }
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Redis Stack --- Vector database}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://redis.io/docs/latest/develop/get-started/vector-database/
+      \endverb
+      \verb{url}
+      \verb https://redis.io/docs/latest/develop/get-started/vector-database/
+      \endverb
+    \endentry
+    \entry{cosineSim}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{Cosine similarity}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Cosine_similarity
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Cosine_similarity
+      \endverb
+    \endentry
+    \entry{nginx}{online}{}
+      \list{organization}{1}{%
+        {F5 Inc.}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido: Jun. 2026}
+      \field{title}{{NGINX Reverse Proxy --- ngx\_http\_proxy\_module}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://nginx.org/en/docs/http/ngx_http_proxy_module.html
+      \endverb
+      \verb{url}
+      \verb https://nginx.org/en/docs/http/ngx_http_proxy_module.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

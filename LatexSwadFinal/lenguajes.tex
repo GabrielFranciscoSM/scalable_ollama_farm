@@ -1,0 +1,163 @@
+\lstdefinelanguage{Dockerfile}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    morekeywords={
+        FROM, RUN, CMD, LABEL, MAINTAINER, EXPOSE, ENV,
+        ADD, COPY, ENTRYPOINT, VOLUME, USER, WORKDIR,
+        ARG, ONBUILD, STOPSIGNAL, HEALTHCHECK, SHELL
+    },
+    keywordstyle=\color{blue}\bfseries,
+    comment=[l]{\#},
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    morestring=[b]"
+}
+
+\lstdefinelanguage{docker-compose}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    keywords={version, services, volumes, networks, build, image, ports, environment, args,
+     container_name, depends_on, external, command, driver, name, ipam, config, subnet, context,
+     dockerfile, ipv4_address, deploy, replicas},
+    keywordstyle=\color{blue}\bfseries,
+    comment=[l]{\#},
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    morestring=[b]"
+}
+\lstdefinelanguage{Ini}
+{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    morecomment=[l]{;}, % Comentarios con punto y coma
+    morecomment=[l]{\#}, % Comentarios con almohadilla
+    commentstyle=\color{gray}\ttfamily,
+    morekeywords={}, % No palabras clave por defecto
+    otherkeywords={=,:}, % Operadores de asignación
+    keywordstyle=\color{green}\bfseries,
+    moredelim=[s][\color{Orchid}\bfseries]{[}{]}, % Secciones entre corchetes
+    escapechar=@ % Permite usar LaTeX dentro del código si es necesario
+}
+
+\lstdefinelanguage{configure}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{blue},
+    keywordstyle=\color{purple}\bfseries,
+    morekeywords={
+        server, location, proxy_pass, proxy_set_header, proxy_hide_header,
+        stub_status, access_log, error_log, server_name, listen, upstream, http,
+        events, worker_connections},
+    morecomment=[l]{\#},
+    morestring=[b]",
+    showstringspaces=false,
+    texcl=true,
+    frame=single
+}
+
+\lstdefinelanguage{configure2}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{blue},
+    keywordstyle=\color{purple}\bfseries,
+    morekeywords={
+        server, defaults, global, frontend, backend, balance, mode, listen,
+        timeout, http, response, stats, bind, default_backend},
+    morecomment=[l]{\#},
+    morestring=[b]",
+    showstringspaces=false,
+    texcl=true,
+    frame=single
+}
+
+\lstdefinelanguage{bash}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+    {├}{{\ensuremath{\mid}}}1
+    {│}{{\textbar}}1
+    {└}{{\ensuremath{\lfloor}}}1
+    {──}{{--}}2
+    {─}{{-}}1,
+  morekeywords={if, then, else, fi, for, do, done, while, case, export, docker , compose, esac},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  alsoletter={\$,\_},
+  sensitive=true
+}
+
+\lstdefinelanguage{HTML5}{
+basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{blue},
+    keywordstyle=\color{purple}\bfseries,
+  language=html,
+  sensitive=true,
+  alsoletter={<>=-},
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  morestring=[b]",
+  morestring=[b]',
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+  otherkeywords={
+    % General
+    % >,
+    % Standard tags
+    <!DOCTYPE, </html, <?php, if, $\_SERVER, echo, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+    % body
+    </body, <body,
+    % Divs
+    </div, <div, </div>,
+    % Paragraphs
+    </p, <p, </p>,
+    % scripts
+    </script, <script,
+    % More tags...
+    <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
+  },
+  ndkeywords={
+    % General
+    =,
+    % HTML attributes
+    charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+    % SVG attributes
+    fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+    % properties
+    margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+    % CSS3 properties
+    transform:, -moz-transform:, -webkit-transform:,
+    animation:, -webkit-animation:,
+    transition:, transition-duration:, transition-property:, transition-timing-function:
+  }
+}
+
