@@ -1,0 +1,123 @@
+\input{estilos.tex}
+ 
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\section{Introducción}
+\begin{frame}
+\frametitle{Introducción}
+a
+\end{frame}
+
+\section{Arquitectura del sistema}
+\begin{frame}{Arquitectura del sistema}
+
+    \begin{figure}[H]
+        \centering
+        \shorthandoff{>}\shorthandoff{<}
+        \scalebox{0.48}{%
+        \begin{tikzpicture}[
+            node distance=1.8cm and 1.2cm,
+            box/.style={rectangle, draw=black!60, fill=black!5, very thick, minimum width=2.8cm, minimum height=1cm, align=center},
+            db/.style={cylinder, draw=black!60, fill=black!5, very thick, minimum width=2cm, minimum height=1cm, align=center, shape border rotate=90},
+            arrow/.style={-stealth, thick}
+        ]
+            \node[box, fill=color5!30] (cliente) {Cliente\\externo};
+            
+            \node[box, right=of cliente] (nginx) {Nginx\\:80};
+            
+            \node[box, right=of nginx] (litellm) {LiteLLM\\:4000};
+            
+            \node[db, above=of litellm, yshift=-0.5cm] (redis) {Redis Stack\\:6379};
+            
+            \node[box, below left=of litellm, yshift=0.5cm, xshift=-1cm] (ollama1) {Ollama-1\\:11434\\(qwen3.5)};
+            \node[box, below right=of litellm, yshift=0.5cm, xshift=1cm] (ollama2) {Ollama-2\\:11436\\(qwen3.5)};
+            
+            \node[box, above=of redis, yshift=-0.5cm] (ollamaEmb) {Ollama-embed\\:11435\\(nomic-embed)};
+            
+            \draw[arrow] (cliente) -- (nginx);
+            \draw[arrow] (nginx) -- (litellm);
+            \draw[arrow] (litellm) -- (redis) node[midway, right] {cache};
+            \draw[arrow] (litellm) -- (ollama1) node[midway, left] {infer};
+            \draw[arrow] (litellm) -- (ollama2) node[midway, right] {infer};
+            \draw[arrow] (litellm) -- (ollamaEmb) node[midway, right, yshift=2.6cm] {embed};
+            \draw[arrow, densely dashed] (redis) -- (ollamaEmb);
+        \end{tikzpicture}%
+        }
+        \caption{Arquitectura del sistema: flujo de peticiones entre componentes.}
+        \label{fig:arquitectura}
+    \end{figure}
+    
+\end{frame}
+
+\section{Análisis de rendimiento}
+\subsection{Resultados}
+\begin{frame}{Análisis de rendimiento}{Resultados}
+\begin{table}[H]
+    \centering
+    \caption{Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos.}
+    \label{tab:resultados}
+    \hspace{-0.2cm}
+
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Grupo} & \textbf{Pet.} & \textbf{HITs (w)} & \textbf{HITs (r)} & \textbf{Acierto} \\
+        \midrule
+        Duplicados exactos      & 20 & 10 & 10 & 100\,\% \\
+        Paráfrasis Geografía    & 15 & 10 & 10 & 100\,\% \\
+        Paráfrasis Ciencia      & 15 & 10 &  4 &  40\,\% \\
+        Paráfrasis Historia     & 15 & 10 &  7 &  70\,\% \\
+        Relacionados distintos  &  9 &  0 &  0 &   0\,\% \\
+        No relacionados         &  5 &  0 &  1 & ---    \\
+        Balanceo de carga       & 10 &  0 &  0 & ---    \\
+        \bottomrule
+    \end{tabular}
+
+\end{table}
+
+\end{frame}
+\begin{frame}{Análisis de rendimiento}{Resultados}
+
+\begin{figure}[H]
+    \centering
+    % Primera subfigura
+    \begin{subfigure}
+        \centering
+        \shorthandoff{>}\shorthandoff{<}
+        \scalebox{0.64}{%
+        \begin{tikzpicture}
+            \draw[fill=green!40]  (0,0)    rectangle (2.5,0.2)  node[midway] {31 ms};
+            \draw[fill=red!40]    (3.5,0)  rectangle (6.0,5.9)  node[midway] {5929 ms};
+            \node[anchor=west] at (0,-0.6)   {Cache HIT};
+            \node[anchor=west] at (3.5,-0.6) {Cache MISS};
+            \node[anchor=north] at (3,-1.4)  {Factor de aceleraci\'on: $191.5\times$};
+            \draw[-stealth] (-0.5,0) -- (7,0);
+            \node[anchor=north east] at (7,0.2) {ms};
+        \end{tikzpicture}%
+        }
+        \label{fig:latencia}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}
+        \centering
+        \shorthandoff{>}\shorthandoff{<}
+        \scalebox{0.66}{%
+        \begin{tikzpicture}
+            \draw[fill=blue!40]   (0,0)   rectangle (2.5,4.5) node[midway] {45 req};
+            \draw[fill=orange!40] (3.5,0) rectangle (6.0,4.4) node[midway] {44 req};
+            \node[anchor=west] at (0,-0.6)   {ollama-1 (51\,\%)};
+            \node[anchor=west] at (3.5,-0.6) {ollama-2 (49\,\%)};
+            \draw[-stealth] (-0.5,0) -- (7,0);
+            \node[anchor=north east] at (7,0.2) {peticiones};
+        \end{tikzpicture}%
+        }
+        \label{fig:balanceo}
+    \end{subfigure}
+\end{figure}%
+
+\end{frame}
+
+\end{document}

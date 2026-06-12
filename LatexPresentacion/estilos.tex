@@ -1,0 +1,75 @@
+\documentclass[11pt]{beamer}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{multimedia}
+\usepackage{epstopdf}
+\usepackage{longtable,multirow,booktabs}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{adjustbox}
+\usepackage{tcolorbox}
+\usepackage{amsmath,amsfonts,amssymb,graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, shapes, calc}
+\usepackage{wrapfig}
+\usepackage{xlop}
+\usepackage{multicol}
+
+\useoutertheme{smoothbars}
+\useinnertheme{rounded}
+
+\definecolor{mygreen1}{RGB}{0,73,44}
+\definecolor{mygreen2}{RGB}{0,140,81}
+\definecolor{mygreen3}{RGB}{0,208,120}
+
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{light-gray}{HTML}{E5E4E2}
+\definecolor{light-cyan}{HTML}{E0FFFF}
+
+\newtcolorbox{mybox}[1]
+{colback=mygreen1!5!white,colframe=mygreen2!75!black,fonttitle=\bfseries,title=#1}
+
+\setbeamercolor{structure}{fg=white,bg=mygreen2}
+\setbeamercolor*{palette primary}{fg=mygreen1,bg=mygreen2}
+\setbeamercolor*{palette secondary}{fg=white,bg=mygreen1}
+\setbeamercolor*{palette tertiary}{bg=mygreen1,fg=white}
+\setbeamercolor*{palette quaternary}{fg=white,bg=mygreen2!50}
+
+\setbeamercolor{frametitle}{fg=white!90!mygreen1}
+
+\setbeamercolor{section in head/foot}{fg=white,bg=mygreen1}
+\setbeamercolor{group in head/foot}{fg=white,bg=mygreen3}
+\setbeamercolor{title in head/foot}{fg=white,bg=mygreen2}
+
+\defbeamertemplate*{headline}{mytheme}
+{%
+  \begin{beamercolorbox}[ht=2.25ex,dp=3.75ex]{section in head/foot}
+    \insertnavigation{\paperwidth}
+  \end{beamercolorbox}%
+}%
+\subtitle[ICAR, ETSIIT, UGR]{Trabajo final}
+\newcommand{\myMateria}{Servidores Web de Altas Prestaciones}
+\defbeamertemplate*{footline}{mytheme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=3ex,dp=1ex,center]{section in head/foot}%
+    \usebeamerfont{section in head/foot}\myMateria
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=3ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot} \insertsubtitle
+  \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.35\paperwidth,ht=3ex,dp=1ex,center]{group in head/foot}%
+    \usebeamerfont{group in head/foot}\hspace{0.6cm}\insertshortsubtitle \hspace{0.8cm}
+    \insertframenumber{} / \inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\title{ \textit{Granja de modelos de IA}}
+\author{Francisco Javier Pérez García \\ \and Manuel Ruiz Aguilar \\ \and Gabriel Francisco Sánchez Muñoz }
+\date{\textit{\textcolor{mygreen2}{\myMateria, \insertshortsubtitle}}}
