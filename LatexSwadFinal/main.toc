@@ -1,0 +1,27 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{Listado de imágenes}{0}{figure.caption.2}%
+\contentsline {section}{\numberline {1}Introducción}{1}{section.1}%
+\contentsline {section}{\numberline {2}Fundamentos teóricos}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Docker y Docker Compose}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Ollama}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}LiteLLM}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Redis Stack y caché semántico}{2}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Nginx como proxy inverso}{3}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Objetivos}{3}{section.3}%
+\contentsline {section}{\numberline {4}Arquitectura del sistema}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Diagrama de arquitectura}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Descripción de componentes}{4}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Implementación}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Orquestación con Docker Compose}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Configuración del gateway LiteLLM}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Configuración del proxy Nginx}{7}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Análisis de rendimiento}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Metodología de evaluación}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Grupos experimentales}{8}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Resultados}{9}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Análisis de los resultados}{10}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Conclusiones}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Cumplimiento de objetivos}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Limitaciones}{11}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Trabajo futuro}{11}{subsection.7.3}%
+\contentsline {section}{Bibliografía}{13}{Item.26}%

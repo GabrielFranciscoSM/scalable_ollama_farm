@@ -9,12 +9,59 @@
 \section{Introducción}
 \begin{frame}
 \frametitle{Introducción}
-a
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.27\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/ollama.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.42\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/docker.png}
+    \end{subfigure}
+\end{figure}
+\begin{center}
+{\Huge
+\textbf{¿IA + Granja?}
+}
+\end{center}
+
 \end{frame}
 
-\section{Arquitectura del sistema}
-\begin{frame}{Arquitectura del sistema}
+\section{Fundamentos}
+\begin{frame}
+\frametitle{Fundamentos}
+\begin{itemize}
+    \item \textbf{Docker y Docker Compose}: Contenerización.
+    \item \textbf{Ollama + Qwen3.5 0.8b}: Software para ejecutar modelos IA.
+    \item \textbf{LiteLLM}: Balanceador para IAs.
+    \item \textbf{Redis Stack}: Almacenamiento de caché semántico.
 
+\[ \text{sim}(\vec{a}, \vec{b}) = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \cdot \|\vec{b}\|} \in [-1, 1] \]
+
+    \item \textbf{Nginx}: Proxy inverso.
+\end{itemize}
+
+\end{frame}
+
+\section{Objetivos}
+\begin{frame}
+\frametitle{Objetivos}
+\begin{enumerate}
+    \item Granja IA organizada por funcionalidad y reproducible.
+    
+    \item Distribuir trabajo con balanceo de carga.
+    
+    \item Reducir la carga con consulta al caché semántico.
+    
+    \item Usar un proxy de alto rendimiento con respuestas en \emph{streaming}.
+\end{enumerate}
+\end{frame}
+
+\section{Arquitectura}
+\begin{frame}{Arquitectura}
+    
     \begin{figure}[H]
         \centering
         \shorthandoff{>}\shorthandoff{<}
@@ -25,25 +72,25 @@ a
             db/.style={cylinder, draw=black!60, fill=black!5, very thick, minimum width=2cm, minimum height=1cm, align=center, shape border rotate=90},
             arrow/.style={-stealth, thick}
         ]
-            \node[box, fill=color5!30] (cliente) {Cliente\\externo};
+            \node[font=\sffamily\bfseries, box, fill=color5!30] (cliente) {Cliente\\externo};
             
-            \node[box, right=of cliente] (nginx) {Nginx\\:80};
+            \node[font=\sffamily\bfseries, box, right=of cliente] (nginx) {Nginx\\:80};
             
-            \node[box, right=of nginx] (litellm) {LiteLLM\\:4000};
+            \node[font=\sffamily\bfseries, box, right=of nginx] (litellm) {LiteLLM\\:4000};
             
-            \node[db, above=of litellm, yshift=-0.5cm] (redis) {Redis Stack\\:6379};
+            \node[font=\sffamily\bfseries, db, above=of litellm, yshift=-0.5cm] (redis) {Redis Stack\\:6379};
             
-            \node[box, below left=of litellm, yshift=0.5cm, xshift=-1cm] (ollama1) {Ollama-1\\:11434\\(qwen3.5)};
-            \node[box, below right=of litellm, yshift=0.5cm, xshift=1cm] (ollama2) {Ollama-2\\:11436\\(qwen3.5)};
+            \node[font=\sffamily\bfseries, box, below left=of litellm, yshift=0.5cm, xshift=-1cm] (ollama1) {Ollama-1\\:11434\\(qwen3.5)};
+            \node[font=\sffamily\bfseries, box, below right=of litellm, yshift=0.5cm, xshift=1cm] (ollama2) {Ollama-2\\:11436\\(qwen3.5)};
             
-            \node[box, above=of redis, yshift=-0.5cm] (ollamaEmb) {Ollama-embed\\:11435\\(nomic-embed)};
+            \node[font=\sffamily\bfseries, box, above=of redis, yshift=-0.5cm] (ollamaEmb) {Ollama-embed\\:11435\\(nomic-embed)};
             
             \draw[arrow] (cliente) -- (nginx);
             \draw[arrow] (nginx) -- (litellm);
-            \draw[arrow] (litellm) -- (redis) node[midway, right] {cache};
-            \draw[arrow] (litellm) -- (ollama1) node[midway, left] {infer};
-            \draw[arrow] (litellm) -- (ollama2) node[midway, right] {infer};
-            \draw[arrow] (litellm) -- (ollamaEmb) node[midway, right, yshift=2.6cm] {embed};
+            \draw[arrow] (litellm) -- (redis) node[font=\sffamily\bfseries, midway, right] {cache};
+            \draw[arrow] (litellm) -- (ollama1) node[font=\sffamily\bfseries, midway, left] {infer};
+            \draw[arrow] (litellm) -- (ollama2) node[font=\sffamily\bfseries, midway, right] {infer};
+            \draw[arrow] (litellm) -- (ollamaEmb) node[font=\sffamily\bfseries, midway, right, yshift=2.6cm] {embed};
             \draw[arrow, densely dashed] (redis) -- (ollamaEmb);
         \end{tikzpicture}%
         }
@@ -53,12 +100,25 @@ a
     
 \end{frame}
 
+\section{Implementación}
+\begin{frame}
+\frametitle{Implementación}
+\begin{itemize}
+    \item \textbf{\texttt{docker-compose.yml}}: red \emph{semantic-cache-net}, \emph{depends\_on}, puertos, comandos, variables de entorno, scripts, healthchecks y volúmenes.
+
+    \item \textbf{\texttt{configv2.yaml}}: dos entradas para inferencia y una para embeddings, con sus debidos parámetros de APIs, el umbral de similitud a 0.85, tamaño de vector y tiempo de vida en caché.
+
+    \item \textbf{\texttt{nginx.conf}}: redirige a LiteLLM:4000, permite \emph{streaming} y extiende timeouts.
+\end{itemize}
+
+\end{frame}
+
 \section{Análisis de rendimiento}
 \subsection{Resultados}
-\begin{frame}{Análisis de rendimiento}{Resultados}
+\begin{frame}{Análisis de rendimiento}{Resultados de \texttt{test\_litellm.py}}
 \begin{table}[H]
     \centering
-    \caption{Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos.}
+    \caption{HITs esperados (w) y obtenidos (r).}
     \label{tab:resultados}
     \hspace{-0.2cm}
 
@@ -70,7 +130,7 @@ a
         Paráfrasis Geografía    & 15 & 10 & 10 & 100\,\% \\
         Paráfrasis Ciencia      & 15 & 10 &  4 &  40\,\% \\
         Paráfrasis Historia     & 15 & 10 &  7 &  70\,\% \\
-        Relacionados distintos  &  9 &  0 &  0 &   0\,\% \\
+        Relacionados distintos  &  9 &  0 &  0 &   --- \\
         No relacionados         &  5 &  0 &  1 & ---    \\
         Balanceo de carga       & 10 &  0 &  0 & ---    \\
         \bottomrule
@@ -79,12 +139,14 @@ a
 \end{table}
 
 \end{frame}
-\begin{frame}{Análisis de rendimiento}{Resultados}
+\begin{frame}{Análisis de rendimiento}{Resultados de \texttt{test\_litellm.py}}
 
 \begin{figure}[H]
     \centering
     % Primera subfigura
-    \begin{subfigure}
+
+    %\hspace{-1cm}
+    \begin{subfigure}[H]{0.48\textwidth}
         \centering
         \shorthandoff{>}\shorthandoff{<}
         \scalebox{0.64}{%
@@ -101,7 +163,7 @@ a
         \label{fig:latencia}
     \end{subfigure}
     \hfill
-    \begin{subfigure}
+    \begin{subfigure}[H]{0.50\textwidth}
         \centering
         \shorthandoff{>}\shorthandoff{<}
         \scalebox{0.66}{%
@@ -118,6 +180,54 @@ a
     \end{subfigure}
 \end{figure}%
 
+\end{frame}
+
+\section{Conclusiones}
+\begin{frame}{Conclusiones}{Cumplimiento de objetivos}
+\begin{table}[H]
+    \centering
+
+    \begin{tabular}{p{5cm}|p{5.5cm}}
+        \toprule
+        \textbf{Cumplido} & \textbf{Limitación}  \\
+        \midrule
+        Aceleración de 191.5x en latencia con caché. & El umbral fijo no se adapta completamente y la latencia se limita con la CPU, y se aumenta con el paso intermedio de consultar caché.\\ \hline
+        Buena detección de paráfrasis en dominios con vocabulario diferenciado.  & En ciencia; por ejemplo; no.    \\ \hline
+        Balanceo equitativo.  & Contamos solo con 2 réplicas de inferencia.   \\ \hline
+        Cambios en la configuración independientes y sencillos. & ---  \\
+        \bottomrule
+    \end{tabular}
+
+\end{table}
+\end{frame}
+
+\begin{frame}{Conclusiones}{Trabajo futuro}
+\begin{itemize}
+    \item Umbral adaptativo.
+    \item Caché multinivel.
+    \item Más réplicas, con escalado dinámico.
+    \item Aceleración por hardware.
+    \item Detección de cuellos de botella con Locust.
+    \item Monitorización con Prometheus y Grafana.
+\end{itemize}
+
+\vspace{0.3cm}
+Red:
+
+\begin{itemize}
+    \item Reglas según IP.
+    \item Certificado SSL en Nginx.
+    \item Optimización de envío según parámetros concretos.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+    {\Huge
+    \textbf{FIN}
+    }
+    \end{center}
 \end{frame}
 
 \end{document}

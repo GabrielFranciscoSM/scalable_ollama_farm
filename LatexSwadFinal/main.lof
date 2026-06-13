@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Arquitectura del sistema: flujo de peticiones entre componentes.}}{4}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms).}}{9}{figure.caption.5}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Distribuci\'on de 89 peticiones entre las dos instancias de inferencia.}}{10}{figure.caption.6}%

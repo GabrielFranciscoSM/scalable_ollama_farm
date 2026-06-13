@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  12 JUN 2026 02:33
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 04:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -794,20 +794,7 @@ Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 )
 \mm@movie=\count353
 )
-(/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf.sty
-Package: epstopdf 2020-01-24 v2.11 Conversion with epstopdf on the fly (HO)
-
-(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
-Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-
-
-Package epstopdf Warning: Drivers other than `pdftex' and `luatex' are not supp
-orted.
-
-)) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
 \LTleft=\skip65
 \LTright=\skip66
@@ -1130,52 +1117,91 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \WF@everypar=\toks56
 Package: wrapfig 2003/01/31  v 3.6
 )
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen349
+\captionmargin=\dimen350
+\caption@leftmargin=\dimen351
+\caption@rightmargin=\dimen352
+\caption@width=\dimen353
+\caption@indent=\dimen354
+\caption@parindent=\dimen355
+\caption@hangindent=\dimen356
+Package caption Info: beamer document class detected.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption-beamer.sto
+File: caption-beamer.sto 2022/01/06 v2.0c Adaption of the caption package to th
+e beamer document classes (AR)
+))
+\c@caption@flags=\count381
+\c@continuedfloat=\count382
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+Package caption Info: longtable package is loaded.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: wrapfig package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count383
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count384
+)
 (/usr/share/texlive/texmf-dist/tex/generic/xlop/xlop.sty
 Package: xlop 2020/04/26 package wrapper for xlop.tex
 
 (/usr/share/texlive/texmf-dist/tex/generic/xlop/xlop.tex
-\op@count@z=\count381
-\op@count@i=\count382
-\op@count@ii=\count383
-\op@count@iii=\count384
-\op@count@iv=\count385
-\op@count@v=\count386
-\op@count@vi=\count387
-\op@nbop=\count388
+\op@count@z=\count385
+\op@count@i=\count386
+\op@count@ii=\count387
+\op@count@iii=\count388
+\op@count@iv=\count389
+\op@count@v=\count390
+\op@count@vi=\count391
+\op@nbop=\count392
 \op@currentstyle=\toks57
 
 `xlop' v0.28  <2020/11/11> (jcc)
-\opcolumnwidth=\dimen349
-\oplineheight=\dimen350
+\opcolumnwidth=\dimen357
+\oplineheight=\dimen358
 \op@strutbox=\box122
-\op@decimalsepwidth=\dimen351
-\op@decimalsepoffset=\dimen352
-\op@hrulewidth=\dimen353
-\op@vrulewidth=\dimen354
-\op@parenthesis=\count389
-\op@token=\count390
-\op@stack=\count391
-\op@stackb=\count392
+\op@decimalsepwidth=\dimen359
+\op@decimalsepoffset=\dimen360
+\op@hrulewidth=\dimen361
+\op@vrulewidth=\dimen362
+\op@parenthesis=\count393
+\op@token=\count394
+\op@stack=\count395
+\op@stackb=\count396
 )) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
-\c@tracingmulticols=\count393
+\c@tracingmulticols=\count397
 \mult@box=\box123
-\multicol@leftmargin=\dimen355
-\c@unbalance=\count394
-\c@collectmore=\count395
-\doublecol@number=\count396
-\multicoltolerance=\count397
-\multicolpretolerance=\count398
-\full@width=\dimen356
-\page@free=\dimen357
-\premulticols=\dimen358
-\postmulticols=\dimen359
+\multicol@leftmargin=\dimen363
+\c@unbalance=\count398
+\c@collectmore=\count399
+\doublecol@number=\count400
+\multicoltolerance=\count401
+\multicolpretolerance=\count402
+\full@width=\dimen364
+\page@free=\dimen365
+\premulticols=\dimen366
+\postmulticols=\dimen367
 \multicolsep=\skip88
 \multicolbaselineskip=\skip89
 \partial@page=\box124
 \last@line=\box125
 \mc@boxedresult=\box126
-\maxbalancingoverflow=\dimen360
+\maxbalancingoverflow=\dimen368
 \mult@rightbox=\box127
 \mult@grightbox=\box128
 \mult@firstbox=\box129
@@ -1216,25 +1242,25 @@ Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
 \@tempa=\box164
 \@tempa=\box165
 \@tempa=\box166
-\c@minrows=\count399
-\c@columnbadness=\count400
-\c@finalcolumnbadness=\count401
-\last@try=\dimen361
-\multicolovershoot=\dimen362
-\multicolundershoot=\dimen363
+\c@minrows=\count403
+\c@columnbadness=\count404
+\c@finalcolumnbadness=\count405
+\last@try=\dimen369
+\multicolovershoot=\dimen370
+\multicolundershoot=\dimen371
 \mult@nat@firstbox=\box167
 \colbreak@box=\box168
-\mc@col@check@num=\count402
+\mc@col@check@num=\count406
 )
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemesmoothbars.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty)
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 74.
+(hyperref)                removing `\\' on input line 85.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 74.
+(hyperref)                removing `\\' on input line 85.
 
 ) (./main.aux
 LaTeX Info: Redefining \. on input line 12.
@@ -1442,6 +1468,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  TU/lmtt/b/n --> TU/lmtt/b/n on input line 3.
 LaTeX Info: Redefining \. on input line 3.
 LaTeX Info: Redefining \% on input line 3.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
  (./main.nav)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <14.4> not available
 (Font)              Font shape `TU/lmss/m/sl' tried instead on input line 7.
@@ -1449,109 +1477,55 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
 (Font)              Font shape `TU/lmss/m/sl' tried instead on input line 7.
  [1
 
-] [2
-
 ]
-
-./main.tex:54: Package xcolor Error: Undefined color `color5'.
-
-See the xcolor package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.54 \end{frame}
-                
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+File: Images/ollama.png Graphic file (type bmp)
+<Images/ollama.png>
+LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
 
 
-./main.tex:54: Package xcolor Error: Undefined color `color5'.
-
-See the xcolor package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.54 \end{frame}
-                
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[3
-
-]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
-
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 81.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 30.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 81.
- [4
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 30.
+File: Images/docker.png Graphic file (type bmp)
+<Images/docker.png>
+ [2
+
+] [3
+
+] [4
+
+] [5
 
 ]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 114.
 
-./main.tex:121: LaTeX Error: Environment subfigure undefined.
+[6
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.121 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+] [7
 
+] [8
 
-./main.tex:121: LaTeX Error: \begin{center} on input line 121 ended by \end{sub
-figure}.
+]
+Overfull \hbox (15.86404pt too wide) in paragraph at lines 202--202
+ [] 
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.121 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+[9
 
+] [10
 
-./main.tex:121: LaTeX Error: Environment subfigure undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.121 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./main.tex:121: LaTeX Error: \begin{center} on input line 121 ended by \end{sub
-figure}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.121 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[5
+] [11
 
 ]
 \tf@nav=\write6
@@ -1572,15 +1546,15 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1B7C723B5FAFFA7487D8C4B657D01401;549.
+(rerunfilecheck)             Checksum: 1D9AA5857348AAC397E3C32C169CF064;888.
  ) 
 Here is how much of TeX's memory you used:
- 35324 strings out of 476824
- 762223 string characters out of 5803868
- 1933627 words of memory out of 5000000
- 56547 multiletter control sequences out of 15000+600000
- 563285 words of font info for 81 fonts, out of 8000000 for 9000
+ 36896 strings out of 476824
+ 792765 string characters out of 5803868
+ 1936627 words of memory out of 5000000
+ 58103 multiletter control sequences out of 15000+600000
+ 563317 words of font info for 85 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 133i,20n,126p,460b,841s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 133i,20n,134p,460b,898s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (5 pages).
+Output written on main.pdf (11 pages).

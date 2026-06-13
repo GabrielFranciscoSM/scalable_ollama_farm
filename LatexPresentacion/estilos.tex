@@ -4,7 +4,7 @@
 
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{multimedia}
-\usepackage{epstopdf}
+%\usepackage{epstopdf}
 \usepackage{longtable,multirow,booktabs}
 \usepackage[dvipsnames,table]{xcolor}
 \usepackage{adjustbox}
@@ -15,15 +15,26 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric, shapes, calc}
 \usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{caption}
 \usepackage{xlop}
 \usepackage{multicol}
 
 \useoutertheme{smoothbars}
 \useinnertheme{rounded}
 
+\definecolor{color1}{RGB}{192,72,72}
+\definecolor{color2}{RGB}{0,0,120}
+\definecolor{color3}{RGB}{0,0,255}
+\definecolor{color4}{RGB}{5,5,5}
+\definecolor{color5}{RGB}{255,160,160}
+
 \definecolor{mygreen1}{RGB}{0,73,44}
 \definecolor{mygreen2}{RGB}{0,140,81}
 \definecolor{mygreen3}{RGB}{0,208,120}
+
+\definecolor{verde_kaki}{RGB}{100,100,0}
 
 \setbeamertemplate{navigation symbols}{}
 
@@ -31,7 +42,7 @@
 \definecolor{light-cyan}{HTML}{E0FFFF}
 
 \newtcolorbox{mybox}[1]
-{colback=mygreen1!5!white,colframe=mygreen2!75!black,fonttitle=\bfseries,title=#1}
+{colback=coral!5!white,colframe=coral!75!black,fonttitle=\bfseries,title=#1}
 
 \setbeamercolor{structure}{fg=white,bg=mygreen2}
 \setbeamercolor*{palette primary}{fg=mygreen1,bg=mygreen2}
