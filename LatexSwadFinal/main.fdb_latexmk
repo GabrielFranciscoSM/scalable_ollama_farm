@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1781279221.31028 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/main.tex" "main.pdf" "main" 1781279221.70137 2
+["pdflatex"] 1781319839.98062 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/main.tex" "main.pdf" "main" 1781319840.22954 2
   "/etc/texmf/web2c/texmf.cnf" 1774149356.60798 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/main.tex" 1781171447.7832 4261 f6999216d8f55dcbf61e8a565436bf98 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -13,7 +13,7 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780750571 6822827 56ba091107f9ccd7a1ad48be1caf9d15 ""
-  "main.aux" 1781279221.30787 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.aux" 1781319839.97886 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
   "main.tex" 1781171447.7832 4261 f6999216d8f55dcbf61e8a565436bf98 ""
   "paquetes.tex" 1781170184.26875 2245 3b53660836816838fcc1a4b8add8f754 ""
   (generated)

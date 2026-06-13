@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 04:51
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 05:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1814,7 +1814,7 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DADC772422F3BF5EE2763DA20CCC4F88;4090.
+(rerunfilecheck)             Checksum: 8E371BAD803B13E4D4B1CC01D29D2A50;4090.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 

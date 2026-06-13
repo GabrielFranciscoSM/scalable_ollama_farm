@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1781317936.66449 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexPresentacion/main.tex" "main.pdf" "main" 1781317937.49053 2
+["pdflatex"] 1781319849.33645 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexPresentacion/main.tex" "main.pdf" "main" 1781319850.17369 2
   "/etc/texmf/web2c/texmf.cnf" 1774149356.60798 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexPresentacion/main.tex" 1781317935.53045 8182 31efd01e5c394cd984b95c047b3a93f0 ""
+  "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexPresentacion/main.tex" 1781319848.08687 8183 fab989345dbaec1957445a6be8ffd907 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
@@ -157,8 +157,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780750571 6822827 56ba091107f9ccd7a1ad48be1caf9d15 ""
   "estilos.tex" 1781307720.49396 2893 dd689a43005fb2633bac3a5050d23d4e ""
-  "main.aux" 1781317936.66047 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "main.tex" 1781317935.53045 8182 31efd01e5c394cd984b95c047b3a93f0 ""
+  "main.aux" 1781319849.33287 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.tex" 1781319848.08687 8183 fab989345dbaec1957445a6be8ffd907 ""
   (generated)
   "main.aux"
   "main.log"
