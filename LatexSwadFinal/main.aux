@@ -40,43 +40,52 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Redis Stack y caché semántico}{2}{subsection.2.4}\protected@file@percent }
 \abx@aux@cite{0}{nginx}
 \abx@aux@segm{0}{0}{nginx}
+\abx@aux@cite{0}{locust}
+\abx@aux@segm{0}{0}{locust}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Nginx como proxy inverso}{3}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Locust y Python}{3}{subsection.2.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Objetivos}{3}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Arquitectura del sistema}{3}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Diagrama de arquitectura}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Arquitectura del sistema}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Diagrama de arquitectura}{4}{subsection.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Arquitectura del sistema: flujo de peticiones entre componentes.}}{4}{figure.caption.3}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:arquitectura}{{1}{4}{Arquitectura del sistema: flujo de peticiones entre componentes}{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Descripción de componentes}{4}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Implementación}{5}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Orquestación con Docker Compose}{5}{subsection.5.1}\protected@file@percent }
-\newlabel{lst:dockercompose}{{1}{5}{Definición de servicios en docker-compose.yml}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces Definición de servicios en docker-compose.yml}}{5}{lstlisting.1}\protected@file@percent }
-\newlabel{lst:ollamainit}{{2}{6}{Script de inicialización de Ollama (inferencia)}{lstlisting.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces Script de inicialización de Ollama (inferencia)}}{6}{lstlisting.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Configuración del gateway LiteLLM}{6}{subsection.5.2}\protected@file@percent }
-\newlabel{lst:litellmconfig}{{3}{6}{configv2.yaml --- Configuración de LiteLLM}{lstlisting.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}{\ignorespaces configv2.yaml --- Configuración de LiteLLM}}{6}{lstlisting.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Configuración del proxy Nginx}{7}{subsection.5.3}\protected@file@percent }
-\newlabel{lst:nginxconfig}{{4}{7}{nginx.conf --- Configuración del proxy inverso}{lstlisting.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}{\ignorespaces nginx.conf --- Configuración del proxy inverso}}{7}{lstlisting.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Análisis de rendimiento}{8}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Metodología de evaluación}{8}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Grupos experimentales}{8}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Resultados}{9}{subsection.6.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos.}}{9}{table.caption.4}\protected@file@percent }
-\newlabel{tab:resultados}{{1}{9}{Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos}{table.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms).}}{9}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:latencia}{{2}{9}{Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms)}{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Distribuci\'on de 89 peticiones entre las dos instancias de inferencia.}}{10}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:balanceo}{{3}{10}{Distribuci\'on de 89 peticiones entre las dos instancias de inferencia}{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Análisis de los resultados}{10}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusiones}{11}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Cumplimiento de objetivos}{11}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Limitaciones}{11}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Trabajo futuro}{11}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Bibliografía}{13}{Item.25}\protected@file@percent }
-\abx@aux@read@bbl@mdfivesum{5461F34729466620280054C5F02414C2}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Implementación}{6}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Orquestación con Docker Compose}{6}{subsection.5.1}\protected@file@percent }
+\newlabel{lst:dockercompose}{{1}{6}{Definición de servicios en docker-compose.yml}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces Definición de servicios en docker-compose.yml}}{6}{lstlisting.1}\protected@file@percent }
+\newlabel{lst:ollamainit}{{2}{7}{Script de inicialización de Ollama (inferencia)}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces Script de inicialización de Ollama (inferencia)}}{7}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Configuración del gateway LiteLLM}{7}{subsection.5.2}\protected@file@percent }
+\newlabel{lst:litellmconfig}{{3}{7}{configv2.yaml --- Configuración de LiteLLM}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}{\ignorespaces configv2.yaml --- Configuración de LiteLLM}}{7}{lstlisting.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Configuración del proxy Nginx}{8}{subsection.5.3}\protected@file@percent }
+\newlabel{lst:nginxconfig}{{4}{8}{nginx.conf --- Configuración del proxy inverso}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}{\ignorespaces nginx.conf --- Configuración del proxy inverso}}{8}{lstlisting.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Análisis de rendimiento}{9}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Metodología de evaluación}{9}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Grupos experimentales}{9}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Resultados}{10}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Test LiteLLM}{10}{subsubsection.6.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos.}}{10}{table.caption.4}\protected@file@percent }
+\newlabel{tab:resultados}{{1}{10}{Resultados agregados por grupo experimental. Se indica el número de HITs esperados y los obtenidos}{table.caption.4}{}}
+\newlabel{fig:latencia}{{2a}{10}{Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms)}{figure.caption.5}{}}
+\newlabel{sub@fig:latencia}{{a}{10}{Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms)}{figure.caption.5}{}}
+\newlabel{fig:balanceo}{{2b}{10}{Distribuci\'on de 89 peticiones entre las dos instancias de inferencia}{figure.caption.5}{}}
+\newlabel{sub@fig:balanceo}{{b}{10}{Distribuci\'on de 89 peticiones entre las dos instancias de inferencia}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Gráficos, primera prueba.}}{10}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Locust}{11}{subsubsection.6.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Resultados agregados por grupo experimental en Locust.}}{11}{table.caption.6}\protected@file@percent }
+\newlabel{tab:resultadosL}{{2}{11}{Resultados agregados por grupo experimental en Locust}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Tiempos según percentiles de grupos experimentales en una gráfica.}}{11}{figure.caption.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Análisis de los resultados}{11}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusiones}{13}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Cumplimiento de objetivos}{13}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Limitaciones}{13}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Trabajo futuro}{13}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Bibliografía}{15}{Item.25}\protected@file@percent }
+\abx@aux@read@bbl@mdfivesum{17DCADEF7B12771E1DF049CF65341092}
 \abx@aux@defaultrefcontext{0}{dockerOverview}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{dockerComposeSpec}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{ollama}{none/global//global/global}
@@ -87,4 +96,5 @@
 \abx@aux@defaultrefcontext{0}{redisStack}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{cosineSim}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{nginx}{none/global//global/global}
-\gdef \@abspage@last{15}
+\abx@aux@defaultrefcontext{0}{locust}{none/global//global/global}
+\gdef \@abspage@last{17}

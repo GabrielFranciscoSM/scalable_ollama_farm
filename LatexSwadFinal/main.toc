@@ -7,21 +7,24 @@
 \contentsline {subsection}{\numberline {2.3}LiteLLM}{2}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Redis Stack y caché semántico}{2}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Nginx como proxy inverso}{3}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Locust y Python}{3}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Objetivos}{3}{section.3}%
-\contentsline {section}{\numberline {4}Arquitectura del sistema}{3}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Diagrama de arquitectura}{3}{subsection.4.1}%
+\contentsline {section}{\numberline {4}Arquitectura del sistema}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Diagrama de arquitectura}{4}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Descripción de componentes}{4}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Implementación}{5}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Orquestación con Docker Compose}{5}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Configuración del gateway LiteLLM}{6}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Configuración del proxy Nginx}{7}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Análisis de rendimiento}{8}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Metodología de evaluación}{8}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Grupos experimentales}{8}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Resultados}{9}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Análisis de los resultados}{10}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Conclusiones}{11}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Cumplimiento de objetivos}{11}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Limitaciones}{11}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Trabajo futuro}{11}{subsection.7.3}%
-\contentsline {section}{Bibliografía}{13}{Item.25}%
+\contentsline {section}{\numberline {5}Implementación}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Orquestación con Docker Compose}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Configuración del gateway LiteLLM}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Configuración del proxy Nginx}{8}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Análisis de rendimiento}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Metodología de evaluación}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Grupos experimentales}{9}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Resultados}{10}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Test LiteLLM}{10}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Locust}{11}{subsubsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.4}Análisis de los resultados}{11}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Conclusiones}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Cumplimiento de objetivos}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Limitaciones}{13}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Trabajo futuro}{13}{subsection.7.3}%
+\contentsline {section}{Bibliografía}{15}{Item.25}%

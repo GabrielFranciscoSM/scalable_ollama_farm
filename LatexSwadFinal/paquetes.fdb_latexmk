@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1781170184.77566 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/paquetes.tex" "paquetes.pdf" "paquetes" 1781170185.00605 2
+["pdflatex"] 1781364982.19995 "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/paquetes.tex" "paquetes.pdf" "paquetes" 1781364982.48653 2
   "/etc/texmf/web2c/texmf.cnf" 1774149356.60798 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/paquetes.tex" 1781170184.26875 2245 3b53660836816838fcc1a4b8add8f754 ""
+  "/home/manuadmin/Documents/swFi/scalable_ollama_farm/LatexSwadFinal/paquetes.tex" 1781364981.49458 2267 2fbbd682c231ed103923671e7446c7de ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1705352648 20144 147463a6a579f4597269ef9565205cfe ""
@@ -13,8 +13,8 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780750571 6822827 56ba091107f9ccd7a1ad48be1caf9d15 ""
-  "paquetes.aux" 1781170184.77379 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "paquetes.tex" 1781170184.26875 2245 3b53660836816838fcc1a4b8add8f754 ""
+  "paquetes.aux" 1781364982.19759 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "paquetes.tex" 1781364981.49458 2267 2fbbd682c231ed103923671e7446c7de ""
   (generated)
   "paquetes.aux"
   "paquetes.log"

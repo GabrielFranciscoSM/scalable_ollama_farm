@@ -170,6 +170,12 @@ Dos vectores idénticos tienen similitud~1, vectores ortogonales~0, y vectores o
 
 Nginx~\cite{nginx} es un servidor web y proxy inverso de alto rendimiento. En nuestro sistema actúa como punto de entrada único, exponiendo el puerto~80 al exterior y redirigiendo el tráfico al \textit{upstream} de LiteLLM en el puerto~4000. Se configura con \textit{timeouts} largos (120~s) para tolerar la latencia de inferencia, y con el \textit{buffering} de proxy desactivado para permitir respuestas en \textit{streaming} (SSE, Server-Sent Events) desde el modelo.
 
+\subsection{Locust y Python}
+
+Locust~\cite{locust} se trata de una herramienta que permite realizar pruebas de carga realistas para contextos con usuarios, esto con la función de encontrar cuellos de botellas, validar la capacidad del sistema, ... Pero en nuestro contexto lo empleamos para realizar las pruebas de funcionamiento. Es de código abierto y esta basado en el lenguaje Python, lo que permite aumentar la complejidad y la versatilidad de las pruebas definiendo \emph{tasks} en un archivo \emph{locustfile.py}. Puede combinarse con Docker en lugar de emplear la librería \emph{subprocess}.
+
+También puede emplearse y empleamos un código alternativo con funcionalidades muy útiles en Python con el que ejecutamos otra prueba, pero por supuesto, el código es más difícil de comprender y modificar, y este no podría extenderse tan fácilmente a realizar pruebas de cargas.
+
 \section{Objetivos}
 
 Los objetivos del proyecto son los siguientes:
@@ -192,6 +198,7 @@ Los objetivos del proyecto son los siguientes:
 
 La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las peticiones de los clientes entran a través de Nginx (puerto~80), que las redirige al \textit{gateway} LiteLLM (puerto~4000). LiteLLM consulta Redis para determinar si la pregunta está cacheada y, en caso de no estarlo, enruta la petición a una de las dos instancias de inferencia mediante la estrategia \texttt{simple-shuffle}. La instancia de embeddings es consultada tanto por LiteLLM (para generar el vector de la pregunta entrante) como por Redis (para comparar con los vectores almacenados en el índice).
 
+\vspace{2cm}
 \begin{figure}[H]
     \centering
     \shorthandoff{>}\shorthandoff{<}
@@ -236,10 +243,11 @@ La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las
 
 \textbf{Ollama-embed} es una instancia de Ollama dedicada exclusivamente a generar embeddings con el modelo \texttt{nomic-embed-text}. Es consultada por LiteLLM cada vez que se necesita vectorizar una pregunta entrante para la búsqueda en caché. Su separación en un contenedor independiente evita interferencias con la carga de inferencia y permite escalar los servicios de forma independiente.
 
-\textbf{Redis Stack} actúa como almacén del caché semántico. LiteLLM, a través de su módulo \texttt{RedisSemanticCache}, crea automáticamente un índice vectorial en Redis y almacena las respuestas generadas. Ante búsquedas de similitud, Redis devuelve la respuesta más cercana si supera el umbral 0.85.
+\textbf{Redis Stack} actúa como almacén del caché semántico, puesto que es una extensión de la base de datos Redis que facilita tratar datos complejos como estos. LiteLLM, a través de su módulo \texttt{RedisSemanticCache}, crea automáticamente un índice vectorial en Redis y almacena las respuestas generadas. Ante búsquedas de similitud, Redis devuelve la respuesta más cercana si supera el umbral anteriormente mencionado.
 
 \textbf{Red \texttt{semantic-cache-net}} es una red \textit{bridge} de Docker que conecta todos los servicios. Permite la resolución DNS interna por nombre de contenedor (ej. \texttt{redis}, \texttt{ollama-1}), lo que simplifica la configuración y aísla el tráfico del sistema del resto del \textit{host}.
 
+\newpage
 \section{Implementación}
 
 \subsection{Orquestación con Docker Compose}
@@ -287,6 +295,7 @@ services:
 
 Cada instancia de Ollama define un \texttt{entrypoint} personalizado (Listado~\ref{lst:ollamainit}) que ejecuta el servidor Ollama en segundo plano y, tras una breve pausa, descarga el modelo requerido mediante \texttt{ollama pull}. El modelo queda persistido en un volumen con nombre, por lo que reinicios posteriores del contenedor no necesitan volver a descargarlo.
 
+\newpage
 \begin{lstlisting}[    language=bash,
     basicstyle=\ttfamily\small,
     keywordstyle=\color{blue}\bfseries,
@@ -314,7 +323,7 @@ Redis Stack se configura con un \textit{healthcheck} que verifica la conectivida
 
 El archivo \texttt{configv2.yaml} (Listado~\ref{lst:litellmconfig}) constituye la configuración central del sistema. Define tres entradas en \texttt{model\_list}: dos para inferencia (ambas bajo el nombre lógico \texttt{qwen3}, apuntando a \texttt{ollama-1} y \texttt{ollama-2} respectivamente), y una para embeddings (\texttt{nomic-embed-text} en \texttt{ollama-embed}).
 
-\begin{lstlisting}[caption=configv2.yaml --- Configuración de LiteLLM, label=lst:litellmconfig, basicstyle=\ttfamily\small, breaklines=true, frame=single, numbers=none]
+\begin{lstlisting}[language=config3, caption=configv2.yaml --- Configuración de LiteLLM, label=lst:litellmconfig, basicstyle=\ttfamily\small, breaklines=true, frame=single, numbers=none]
 model_list:
   - model_name: qwen3
     litellm_params:
@@ -351,7 +360,7 @@ litellm_settings:
   drop_params: true
   request_timeout: 60
   telemetry: false
-    \item 
+
 general_settings:
   disable_spend_logs: true
   disable_master_key_hashing: true
@@ -407,9 +416,9 @@ Las directivas clave son \texttt{proxy\_buffering off}, necesaria para que las r
 
 \subsection{Metodología de evaluación}
 
-Para evaluar el rendimiento del sistema se ha desarrollado un \textit{script} de pruebas en Python (\texttt{test\_litellm.py}) que ejecuta 89 peticiones organizadas en siete grupos experimentales, cada uno diseñado para verificar un aspecto concreto del comportamiento del caché semántico y del balanceo de carga.
+Para evaluar el rendimiento del sistema se ha desarrollado un \textit{script} de pruebas en Python (\texttt{test\_litellm.py}) que ejecuta 89 peticiones organizadas en siete grupos experimentales, cada uno diseñado para verificar un aspecto concreto del comportamiento del caché semántico y del balanceo de carga. De forma análoga, empleamos las peticiones para ejecutar Locust y estudiar los tiempos de respuesta.
 
-La detección de aciertos de caché (HIT) y fallos (MISS) se realiza mediante el análisis de los registros (\textit{logs}) del contenedor de LiteLLM. LiteLLM escribe la cadena \texttt{"Cache Hit!"} en su salida estándar de forma síncrona antes de enviar la respuesta HTTP. El \textit{script} toma una instantánea de los logs antes y después de cada petición; si el contador de ocurrencias de \texttt{"Cache Hit!"} se incrementa, la petición se clasifica como HIT, y como MISS en caso contrario. La instancia de Ollama que atendió cada petición se determina contando las líneas que contienen la URL del \textit{api\_base} correspondiente (\texttt{http://ollama-1:11434} o \texttt{http://ollama-2:11434}).
+La detección de aciertos de caché (HIT) y fallos (MISS) se realiza mediante el análisis de los registros (\textit{logs}) del contenedor de LiteLLM. LiteLLM escribe la cadena \texttt{"Cache Hit!"} en su salida estándar de forma síncrona antes de enviar la respuesta HTTP. El \textit{script} toma una instantánea de los logs antes y después de cada petición; si el contador de ocurrencias de \texttt{"Cache Hit!"} se incrementa, la petición se clasifica como HIT, y como MISS en caso contrario. La instancia de Ollama que atendió cada petición se determina contando las líneas que contienen la URL del \textit{api\_base} correspondiente (\texttt{http://ollama-1:11434} o \texttt{http://ollama-2:11434}). Locust, por otra parte, tras haber configurado en su archivo la fracción correspondiente a cada tarea (\emph{@task}); una por grupo; recoge las métricas correspondientes a cada grupo y podremos consultarlas, ya sea a través de la interfaz o mediante archivos `.csv'.
 
 Antes de cada ejecución del \textit{script} se vacía la base de datos Redis y se reinicia LiteLLM para garantizar que el caché parte de un estado limpio y que los índices vectoriales se recrean correctamente. A continuación se realiza un calentamiento con cuatro preguntas triviales que fuerzan la carga inicial de los modelos en memoria.
 
@@ -434,7 +443,7 @@ Los siete grupos de experimentos y su propósito son:
 \end{enumerate}
 
 \subsection{Resultados}
-
+\subsubsection{Test LiteLLM}
 La Tabla~\ref{tab:resultados} resume los resultados agregados por grupo experimental. Las Figuras~\ref{fig:latencia} y~\ref{fig:balanceo} visualizan los datos de latencia y distribución de carga respectivamente.
 
 \begin{table}[H]
@@ -458,47 +467,91 @@ La Tabla~\ref{tab:resultados} resume los resultados agregados por grupo experime
 
 \begin{figure}[H]
     \centering
-    \shorthandoff{>}\shorthandoff{<}
-    \begin{tikzpicture}
-        \draw[fill=green!40]  (0,0)    rectangle (2.5,0.2)  node[midway] {31 ms};
-        \draw[fill=red!40]    (3.5,0)  rectangle (6.0,5.9)  node[midway] {5929 ms};
-        \node[anchor=west] at (0,-0.6)   {Cache HIT};
-        \node[anchor=west] at (3.5,-0.6) {Cache MISS};
-        \node[anchor=north] at (3,-1.4)  {Factor de aceleraci\'on: $191.5\times$};
-        \draw[-stealth] (-0.5,0) -- (7,0);
-        \node[anchor=north east] at (7,0.2) {ms};
-    \end{tikzpicture}
-    \caption{Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms).}
-    \label{fig:latencia}
-\end{figure}
+    % Primera subfigura
+
+    %\hspace{-1cm}
+    \begin{subfigure}[H]{0.48\textwidth}
+        \centering
+        \shorthandoff{>}\shorthandoff{<}
+        \begin{tikzpicture}
+            \draw[fill=green!40]  (0,0)    rectangle (2.5,0.2)  node[midway] {31 ms};
+            \draw[fill=red!40]    (3.5,0)  rectangle (6.0,5.9)  node[midway] {5929 ms};
+            \node[anchor=west] at (0,-0.6)   {Cache HIT};
+            \node[anchor=west] at (3.5,-0.6) {Cache MISS};
+            \node[anchor=north] at (3,-1.4)  {Factor de aceleraci\'on: $191.5\times$};
+            \draw[-stealth] (-0.5,0) -- (7,0);
+            \node[anchor=north east] at (7,0.2) {ms};
+        \end{tikzpicture}%
+        \caption{Latencia media de las peticiones con acierto de cach\'e (31~ms) frente a las que requieren inferencia completa (5929~ms).}
+        \label{fig:latencia}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.50\textwidth}
+        \centering
+        \shorthandoff{>}\shorthandoff{<}
+        \begin{tikzpicture}
+            \draw[fill=blue!40]   (0,0)   rectangle (2.5,4.5) node[midway] {45 req};
+            \draw[fill=orange!40] (3.5,0) rectangle (6.0,4.4) node[midway] {44 req};
+            \node[anchor=west] at (0,-0.6)   {ollama-1 (51\,\%)};
+            \node[anchor=west] at (3.5,-0.6) {ollama-2 (49\,\%)};
+            \draw[-stealth] (-0.5,0) -- (7,0);
+            \node[anchor=north east] at (7,0.2) {peticiones};
+        \end{tikzpicture}%
+        \caption{Distribuci\'on de 89 peticiones entre las dos instancias de inferencia.}
+        \label{fig:balanceo}
+    \end{subfigure}
+    \caption{Gráficos, primera prueba.}
+\end{figure}%
+
+\newpage 
+\subsubsection{Locust}
+
+En la siguiente tabla, vemos el número de peticiones de cada grupo y sus tiempos mínimos, máximos y medios, e incluso el tamaño medio de la respuesta.
+
+\begin{table}[H]
+\centering
+\caption{Resultados agregados por grupo experimental en Locust.}
+    \label{tab:resultadosL}
+\small
+  \begin{tabularx}{\textwidth}{lrrrrrr}
+  \toprule
+  \textbf{Grupo} & \textbf{Peticiones} & \textbf{Mediana RT} & \textbf{Media RT }& \textbf{Mín. RT} & \textbf{Máx. RT} & \textbf{Tamaño medio} \\
+  \midrule
+  Duplicados exactos & 129 & 310 & 3780 & 45 & 52933 & 308 \\
+  Balanceo de carga  & 12 & 28000 & 25615 & 12583 & 44469 & 281 \\
+  Paráfrasis Geografía & 24 & 250 & 9864 & 56 & 52635 & 304 \\
+  Paráfrasis Historia & 28 & 880 & 8357 & 59 & 37526 & 300 \\
+  Paráfrasis Ciencia & 40 & 250 & 7619 & 57 & 47966 & 303 \\
+  Relacionados distintos & 23 & 1400 & 13803 & 60 & 44017 & 298 \\
+  No relacionados & 15 & 410 & 8302 & 60 & 59903 & 305 \\
+  \bottomrule
+  \end{tabularx}
+\end{table}
+
+Donde RT abrevia \emph{Request Time}, los tiempos se miden en milisegundos y el tamaño en bytes. Se han obviado las columnas de fallos, que estaban a cero, y los porcentiles los aportamos a modo de gráfica a continuación.
 
 \begin{figure}[H]
-    \centering
-    \shorthandoff{>}\shorthandoff{<}
-    \begin{tikzpicture}
-        \draw[fill=blue!40]   (0,0)   rectangle (2.5,4.5) node[midway] {45 req};
-        \draw[fill=orange!40] (3.5,0) rectangle (6.0,4.4) node[midway] {44 req};
-        \node[anchor=west] at (0,-0.6)   {ollama-1 (51\,\%)};
-        \node[anchor=west] at (3.5,-0.6) {ollama-2 (49\,\%)};
-        \draw[-stealth] (-0.5,0) -- (7,0);
-        \node[anchor=north east] at (7,0.2) {peticiones};
-    \end{tikzpicture}
-    \caption{Distribuci\'on de 89 peticiones entre las dos instancias de inferencia.}
-    \label{fig:balanceo}
+  \begin{center}
+    \includegraphics[width=\textwidth]{Images/graf_perc.png}
+  \end{center}
+  \caption{Tiempos según percentiles de grupos experimentales en una gráfica.}
 \end{figure}
 
 \subsection{Análisis de los resultados}
 
-\textbf{Caché exacto (100\,\% de acierto).} Las 10 preguntas repetidas de forma idéntica en el grupo de duplicados exactos obtuvieron HIT en su segunda aparición sin excepción. Esto confirma que el flujo básico de almacenamiento y recuperación del caché funciona correctamente.
+\textbf{Caché exacto (100\,\% de acierto).} Las 10 preguntas repetidas de forma idéntica en el grupo de duplicados exactos obtuvieron HIT en su segunda aparición sin excepción. Esto confirma que el flujo básico de almacenamiento y recuperación del caché funciona correctamente. Respecto a sus tiempos, aproximadamente a partir del percentil noventa con métricas altas coincide con la propoción de las peticiones por primera vez (10) respecto al total del grupo (129), que están formadas por la mismas diez peticiones repetidas, y sus tiempos de respuesta se reducen con el caché. 
 
 \textbf{Caché semántico sobre paráfrasis.} El rendimiento varía según el dominio. En Geografía, las 10 paráfrasis esperadas se detectaron correctamente (100\,\%). En Historia y Arte, 7 de 10 (70\,\%); adicionalmente se produjo un falso positivo en la primera pregunta de la Gran Muralla China (\textit{``What is the Great Wall of China?''}), que acertó en caché sin haber sido formulada antes. En Ciencia solo se detectaron 4 de 10 (40\,\%). Los falsos negativos se concentran en preguntas como las relativas a la fotosíntesis (\textit{``How does photosynthesis work?''} vs.~\textit{``Explain the process of photosynthesis''}) o la gravedad (\textit{``What is gravity?''} vs.~\textit{``How does gravity work?''}), donde el modelo de embeddings no asigna suficiente similitud coseno a pesar de la equivalencia semántica. Esto sugiere que el umbral 0.85 puede ser demasiado restrictivo para ciertos dominios.
 
+La correlación entre un aumento de las métricas temporales y el número de MISS debería poder apreciarse si todas las peticiones de paráfrasis fueran distintas, pero en este caso (Locust) se repiten y no hay mecanismo para hacer un uso equitativo de estas, y si el número de peticiones realizadas supera el número de peticiones distintas es obvio que se han repetido. Los últimos percentiles (probablemente correspondientes a las primeras veces de cada petición) nos muestran que la dificultad de los temas de algunos grupos de paráfrasis es distinta, ya sea por las preguntas concretas o la configuración del modelo en sí.
+
 \textbf{Falsos positivos.} Se detectó un único falso positivo en el grupo de no relacionados: la pregunta \textit{``What is the boiling point of ethanol?''} obtuvo HIT, probablemente por similitud con la pregunta \textit{``What is the boiling point of water?''} del grupo de duplicados exactos. Este caso ilustra el compromiso inherente al caché semántico: umbrales más bajos mejoran la tasa de acierto en paráfrasis a costa de aumentar los falsos positivos.
 
-\textbf{Latencia.} La diferencia es drástica: las peticiones resueltas desde caché promedian 31~ms, frente a los 5929~ms que requiere la inferencia completa en CPU con el modelo \texttt{qwen3.5:0.8b}. El factor de aceleración es de \textbf{191.5$\times$} (mediana de 31~ms frente a 5925~ms). La latencia de caché está dominada por la generación del embedding de la pregunta entrante y la consulta al índice vectorial de Redis; la latencia de inferencia refleja el coste computacional de generar la respuesta token a token en CPU.
+\textbf{Latencia.} La diferencia es drástica: las peticiones resueltas desde caché promedian 31~ms, frente a los 5929~ms que requiere la inferencia completa en CPU con el modelo \texttt{qwen3.5:0.8b}. El factor de aceleración es de \textbf{191.5$\times$} (mediana de 31~ms frente a 5925~ms). La latencia de caché está dominada por la generación del embedding de la pregunta entrante y la consulta al índice vectorial de Redis; la latencia de inferencia refleja el coste computacional de generar la respuesta token a token en CPU. Con Locust la proporción se mantiene, considerando los tiempos de la mediana y el porcentil noventa y ocho, puesto que los tiempos mínimos se alejan de la proporción anterior por la carga, que ralentiza al sistema y parece aumentar casi diez veces el resto de métricas.
 
-\textbf{Balanceo de carga.} La estrategia \texttt{simple-shuffle} produjo una distribución prácticamente equitativa: 45 peticiones a ollama-1 (51\,\%) y 44 a ollama-2 (49\,\%). La pequeña asimetría es esperable en un reparto aleatorio con un número finito de muestras.
+\textbf{Balanceo de carga.} La estrategia \texttt{simple-shuffle} produjo una distribución prácticamente equitativa: 45 peticiones a ollama-1 (51\,\%) y 44 a ollama-2 (49\,\%). La pequeña asimetría es esperable en un reparto aleatorio con un número finito de muestras. Como solicitamos que se emplee el caché en este grupo, es comprensible que sus tiempos sean altos pero con poca variación, ya que la petición es idéntica cada vez.
 
+\newpage
 \section{Conclusiones}
 
 \subsection{Cumplimiento de objetivos}
@@ -513,6 +566,8 @@ Los resultados experimentales demuestran que:
     \item La detección de paráfrasis funciona correctamente en dominios con vocabulario bien diferenciado (Geografía, 100\,\%; Historia, 70\,\%), aunque presenta limitaciones en dominios técnicos como Ciencias (40\,\%).
     
     \item El balanceo de carga mediante \texttt{simple-shuffle} distribuye las peticiones de forma equitativa (51\,\%/49\,\%) sin necesidad de lógica compleja.
+    
+    \item El sistema puede mantener un funcionamiento y velocidad correctos de aproximadamente dos peticiones por segundo con cargas moderadas (aunque repetidas) con tan solo dos instancias.
     
     \item La arquitectura basada en Docker Compose permite escalar horizontalmente añadiendo más instancias de Ollama, modificar el umbral de similitud o cambiar el modelo sin alterar el resto del sistema.
 \end{itemize}
@@ -546,10 +601,10 @@ A partir de los resultados obtenidos, se identifican las siguientes líneas de m
     
     \item \textbf{Monitorización}: integrar Prometheus y Grafana para visualizar en tiempo real la tasa de acierto de caché, latencia por percentil y distribución de carga.
   
-    %\item \textbf{Detección de cuellos de botella}: mediante pruebas de carga con Locust, que se basa en Python como el test utilizado, podríamos hacernos una idea de los límites del sistema e identificar qué mejorar.
+    \item \textbf{Nuevo test de carga}: podemos rehacer/extender el \emph{locustfile.py} para; en un entorno con más instancias; ejecutar una nueva prueba de carga, con lo que podríamos hacernos una idea de los límites del conjunto ampliado e identificar otros aspectos a mejorar o necesidades futuras, de los que tan solo podemos atisbar algo ahora.
     
     %No comprendo la finalidad de varios nodos, si no es necesario ni viable para nada que se nos ocurra sería mejor quitarlo, no estará en la presentación hasta confirmarlo
-    \item \textbf{Caché distribuido}: en un despliegue con múltiples nodos, utilizar Redis Cluster para que el caché semántico sea compartido entre todas las instancias del \textit{gateway}.
+    %\item \textbf{Caché distribuido}: en un despliegue con múltiples nodos, utilizar Redis Cluster para que el caché semántico sea compartido entre todas las instancias del \textit{gateway}.
 \end{enumerate}
 
 Además, existen posibles mejoras en el campo de red:

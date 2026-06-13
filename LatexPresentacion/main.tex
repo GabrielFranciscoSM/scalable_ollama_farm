@@ -41,6 +41,7 @@
 \[ \text{sim}(\vec{a}, \vec{b}) = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \cdot \|\vec{b}\|} \in [-1, 1] \]
 
     \item \textbf{Nginx}: Proxy inverso.
+    \item \textbf{Locust y Python}: Test de funcionalidad.
 \end{itemize}
 
 \end{frame}
@@ -56,6 +57,8 @@
     \item Reducir la carga con consulta al caché semántico.
     
     \item Usar un proxy de alto rendimiento con respuestas en \emph{streaming}.
+    
+    \item Realizar mediciones del rendimiento.
 \end{enumerate}
 \end{frame}
 
@@ -182,6 +185,39 @@
 
 \end{frame}
 
+\subsection{Resultados}
+\begin{frame}{Análisis de rendimiento}{Resultados de \texttt{locustfile.py}}
+\begin{table}[H]
+    \centering
+    \label{tab:resultados2}
+    \hspace{-0.2cm}
+\small
+  \begin{tabularx}{\textwidth}{lrrrrrr}
+  \toprule
+  \textbf{Grupo} & \textbf{Pets.} & \textbf{50\%} & \textbf{Media}& \textbf{Mín.} & \textbf{Máx.} & \textbf{Av. Tam.} \\
+  \midrule
+  Duplic. exactos & 129 & 310 & 3780 & 45 & 52933 & 308 \\
+  Balanceo de carga  & 12 & 28000 & 25615 & 12583 & 44469 & 281 \\
+  Paráfrasis Geo& 24 & 250 & 9864 & 56 & 52635 & 304 \\
+  Paráfrasis Hist & 28 & 880 & 8357 & 59 & 37526 & 300 \\
+  Paráfrasis Ciencia & 40 & 250 & 7619 & 57 & 47966 & 303 \\
+  Relac. distintos & 23 & 1400 & 13803 & 60 & 44017 & 298 \\
+  No relacionados & 15 & 410 & 8302 & 60 & 59903 & 305 \\
+  \bottomrule
+  \end{tabularx}
+
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Análisis de rendimiento}{Resultados de \texttt{locustfile.py}}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Images/graf_perc.png}
+  \end{center}
+\end{figure}
+\end{frame}
+
 \section{Conclusiones}
 \begin{frame}{Conclusiones}{Cumplimiento de objetivos}
 \begin{table}[H]
@@ -191,10 +227,11 @@
         \toprule
         \textbf{Cumplido} & \textbf{Limitación}  \\
         \midrule
-        Aceleración de 191.5x en latencia con caché. & El umbral fijo no se adapta completamente y la latencia se limita con la CPU, y se aumenta con el paso intermedio de consultar caché.\\ \hline
+        Aceleración de 191.5x en latencia con caché. & El umbral fijo no se adapta completamente.\\ \hline
         Buena detección de paráfrasis en dominios con vocabulario diferenciado.  & En ciencia; por ejemplo; no.    \\ \hline
         Balanceo equitativo.  & Contamos solo con 2 réplicas de inferencia.   \\ \hline
-        Cambios en la configuración independientes y sencillos. & ---  \\
+        Cambios en la configuración independientes y sencillos. & La latencia se limita con la CPU y se aumenta con el paso intermedio de consultar caché. \\ \hline
+        Puede atender al menos dos peticiones por segundo. & ---  \\ 
         \bottomrule
     \end{tabular}
 
@@ -207,11 +244,11 @@
     \item Caché multinivel.
     \item Más réplicas, con escalado dinámico.
     \item Aceleración por hardware.
-    %\item Detección de cuellos de botella con Locust.
     \item Monitorización con Prometheus y Grafana.
+    \item Nuevo test de carga.
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 Red:
 
 \begin{itemize}

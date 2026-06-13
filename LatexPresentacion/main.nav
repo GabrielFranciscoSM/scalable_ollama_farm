@@ -34,17 +34,23 @@
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\slideentry {6}{1}{2}{8/8}{Resultados}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@sectionpages {7}{8}}
 \headcommand {\beamer@subsectionpages {7}{8}}
-\headcommand {\sectionentry {7}{Conclusiones}{9}{Conclusiones}{0}}
-\headcommand {\slideentry {7}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{9}{Resultados}}
+\headcommand {\slideentry {6}{2}{1}{9/9}{Resultados}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {7}{0}{2}{10/10}{}{0}}
+\headcommand {\slideentry {6}{2}{2}{10/10}{Resultados}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {7}{0}{3}{11/11}{}{0}}
+\headcommand {\beamer@sectionpages {7}{10}}
+\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\sectionentry {7}{Conclusiones}{11}{Conclusiones}{0}}
+\headcommand {\slideentry {7}{0}{1}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {9}{11}}
-\headcommand {\beamer@sectionpages {9}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\gdef \inserttotalframenumber {11}}
+\headcommand {\slideentry {7}{0}{2}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {7}{0}{3}{13/13}{}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {11}{13}}
+\headcommand {\beamer@sectionpages {11}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\gdef \inserttotalframenumber {13}}

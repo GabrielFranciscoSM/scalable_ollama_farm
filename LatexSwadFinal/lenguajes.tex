@@ -23,8 +23,8 @@
              {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
              {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
     keywords={version, services, volumes, networks, build, image, ports, environment, args,
-     container_name, depends_on, external, command, driver, name, ipam, config, subnet, context,
-     dockerfile, ipv4_address, deploy, replicas},
+     container_name, depends_on, external, command, driver, name, ipam, subnet, context,
+     dockerfile, ipv4_address, deploy, replicas, condition, restart,},
     keywordstyle=\color{blue}\bfseries,
     comment=[l]{\#},
     commentstyle=\color{gray}\ttfamily,
@@ -64,7 +64,9 @@
     morekeywords={
         server, location, proxy_pass, proxy_set_header, proxy_hide_header,
         stub_status, access_log, error_log, server_name, listen, upstream, http,
-        events, worker_connections},
+        events, worker_connections, keepalive, proxy_connect_timeout,
+        proxy_send_timeout, proxy_read_timeout, send_timeout, proxy_http_version,
+        proxy_buffering, chunked_transfer_encoding},
     morecomment=[l]{\#},
     morestring=[b]",
     showstringspaces=false,
@@ -86,6 +88,30 @@
     morekeywords={
         server, defaults, global, frontend, backend, balance, mode, listen,
         timeout, http, response, stats, bind, default_backend},
+    morecomment=[l]{\#},
+    morestring=[b]",
+    showstringspaces=false,
+    texcl=true,
+    frame=single
+}
+
+\lstdefinelanguage{config3}{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{blue},
+    keywordstyle=\color{purple}\bfseries,
+    morekeywords={
+        model_list, model_name, router_settings, litellm_settings, general_settings,
+        litellm_params, model, api_base, timeout, stream_timeout, routing_strategy,
+        num_retries, retry_after, cache, cache_params, type, redis_url, similarity_threshold,
+        redis_semantic_cache_embedding_model, vector_size, ttl, drop_params, request_timeout, 
+        telemetry, disable_spend_logs, disable_master_key_hashing },
     morecomment=[l]{\#},
     morestring=[b]",
     showstringspaces=false,

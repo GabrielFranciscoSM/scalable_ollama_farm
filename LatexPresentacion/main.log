@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 05:04
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 22:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -860,6 +860,16 @@ Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
 \minrowclearance=\skip73
 \rownum=\count364
 )
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen315
+\TX@old@table=\dimen316
+\TX@old@col=\dimen317
+\TX@target=\dimen318
+\TX@delta=\dimen319
+\TX@cols=\count365
+\TX@ftn=\toks50
+)
 (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2022/10/17 v1.3a Adjusting TeX boxes (trim, clip, ...)
 
@@ -868,10 +878,10 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks50
-\XKV@tempa@toks=\toks51
+\XKV@toks=\toks51
+\XKV@tempa@toks=\toks52
 )
-\XKV@depth=\count365
+\XKV@depth=\count366
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
@@ -885,34 +895,34 @@ Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
 \collectedbox=\box85
 )
-\tc@llx=\dimen315
-\tc@lly=\dimen316
-\tc@urx=\dimen317
-\tc@ury=\dimen318
+\tc@llx=\dimen320
+\tc@lly=\dimen321
+\tc@urx=\dimen322
+\tc@ury=\dimen323
 Package trimclip Info: Using driver 'tc-xetex.def'.
 
 (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-xetex.def
 File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
 ))
-\adjbox@Width=\dimen319
-\adjbox@Height=\dimen320
-\adjbox@Depth=\dimen321
-\adjbox@Totalheight=\dimen322
-\adjbox@pwidth=\dimen323
-\adjbox@pheight=\dimen324
-\adjbox@pdepth=\dimen325
-\adjbox@ptotalheight=\dimen326
+\adjbox@Width=\dimen324
+\adjbox@Height=\dimen325
+\adjbox@Depth=\dimen326
+\adjbox@Totalheight=\dimen327
+\adjbox@pwidth=\dimen328
+\adjbox@pheight=\dimen329
+\adjbox@pdepth=\dimen330
+\adjbox@ptotalheight=\dimen331
 
 (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count366
+\c@checkoddpage=\count367
 )
 (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box86
-\sift@deathcycles=\count367
-\@vwid@loff=\dimen327
-\@vwid@roff=\dimen328
+\sift@deathcycles=\count368
+\@vwid@loff=\dimen332
+\@vwid@roff=\dimen333
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2024/01/10 version 6.2.0 text color boxes
@@ -929,16 +939,16 @@ File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
 .sty
 Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
-\pgf@nodesepstart=\dimen329
-\pgf@nodesepend=\dimen330
+\pgf@nodesepstart=\dimen334
+\pgf@nodesepend=\dimen335
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
 .sty
 Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
 )) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2023-11-06 v1.5v LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks52
-\verbatim@line=\toks53
+\every@verbatim=\toks53
+\verbatim@line=\toks54
 \verbatim@in@stream=\read4
 )
 (/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
@@ -951,11 +961,11 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \tcb@upperbox=\box89
 \tcb@lowerbox=\box90
 \tcb@phantombox=\box91
-\c@tcbbreakpart=\count368
-\c@tcblayer=\count369
-\c@tcolorbox@number=\count370
+\c@tcbbreakpart=\count369
+\c@tcblayer=\count370
+\c@tcolorbox@number=\count371
 \l__tcobox_tmpa_box=\box92
-\l__tcobox_tmpa_dim=\dimen331
+\l__tcobox_tmpa_dim=\dimen336
 \tcb@temp=\box93
 \tcb@temp=\box94
 \tcb@temp=\box95
@@ -982,10 +992,10 @@ Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
-\pgffor@iter=\dimen332
-\pgffor@skip=\dimen333
-\pgffor@stack=\toks54
-\pgffor@toks=\toks55
+\pgffor@iter=\dimen337
+\pgffor@skip=\dimen338
+\pgffor@stack=\toks55
+\pgffor@toks=\toks56
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2023-01-15 v3.1.10 (3.1.10)
@@ -993,33 +1003,33 @@ Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
 .code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count371
-\pgfplotmarksize=\dimen334
+\pgf@plot@mark@count=\count372
+\pgfplotmarksize=\dimen339
 )
-\tikz@lastx=\dimen335
-\tikz@lasty=\dimen336
-\tikz@lastxsaved=\dimen337
-\tikz@lastysaved=\dimen338
-\tikz@lastmovetox=\dimen339
-\tikz@lastmovetoy=\dimen340
-\tikzleveldistance=\dimen341
-\tikzsiblingdistance=\dimen342
+\tikz@lastx=\dimen340
+\tikz@lasty=\dimen341
+\tikz@lastxsaved=\dimen342
+\tikz@lastysaved=\dimen343
+\tikz@lastmovetox=\dimen344
+\tikz@lastmovetoy=\dimen345
+\tikzleveldistance=\dimen346
+\tikzsiblingdistance=\dimen347
 \tikz@figbox=\box97
 \tikz@figbox@bg=\box98
 \tikz@tempbox=\box99
 \tikz@tempbox@bg=\box100
-\tikztreelevel=\count372
-\tikznumberofchildren=\count373
-\tikznumberofcurrentchild=\count374
-\tikz@fig@count=\count375
+\tikztreelevel=\count373
+\tikznumberofchildren=\count374
+\tikznumberofcurrentchild=\count375
+\tikz@fig@count=\count376
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count376
-\pgfmatrixcurrentcolumn=\count377
-\pgf@matrix@numberofcolumns=\count378
+\pgfmatrixcurrentrow=\count377
+\pgfmatrixcurrentcolumn=\count378
+\pgf@matrix@numberofcolumns=\count379
 )
-\tikz@expandcount=\count379
+\tikz@expandcount=\count380
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarytopaths.code.tex
@@ -1028,10 +1038,10 @@ File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.
 code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen343
-\pgfarrowlength=\dimen344
-\pgfarrowwidth=\dimen345
-\pgfarrowlinewidth=\dimen346
+\pgfarrowinset=\dimen348
+\pgfarrowlength=\dimen349
+\pgfarrowwidth=\dimen350
+\pgfarrowlinewidth=\dimen351
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarypositioning.code.tex
@@ -1110,11 +1120,11 @@ zlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen347
-\WF@size=\dimen348
-\c@WF@wrappedlines=\count380
+\wrapoverhang=\dimen352
+\WF@size=\dimen353
+\c@WF@wrappedlines=\count381
 \WF@box=\box121
-\WF@everypar=\toks56
+\WF@everypar=\toks57
 Package: wrapfig 2003/01/31  v 3.6
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
@@ -1125,22 +1135,22 @@ Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen349
-\captionmargin=\dimen350
-\caption@leftmargin=\dimen351
-\caption@rightmargin=\dimen352
-\caption@width=\dimen353
-\caption@indent=\dimen354
-\caption@parindent=\dimen355
-\caption@hangindent=\dimen356
+\caption@tempdima=\dimen354
+\captionmargin=\dimen355
+\caption@leftmargin=\dimen356
+\caption@rightmargin=\dimen357
+\caption@width=\dimen358
+\caption@indent=\dimen359
+\caption@parindent=\dimen360
+\caption@hangindent=\dimen361
 Package caption Info: beamer document class detected.
 
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption-beamer.sto
 File: caption-beamer.sto 2022/01/06 v2.0c Adaption of the caption package to th
 e beamer document classes (AR)
 ))
-\c@caption@flags=\count381
-\c@continuedfloat=\count382
+\c@caption@flags=\count382
+\c@continuedfloat=\count383
 Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
@@ -1152,56 +1162,56 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 Package caption Info: wrapfig package is loaded.
 )
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count383
+\c@subfigure=\count384
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count384
+\c@subtable=\count385
 )
 (/usr/share/texlive/texmf-dist/tex/generic/xlop/xlop.sty
 Package: xlop 2020/04/26 package wrapper for xlop.tex
 
 (/usr/share/texlive/texmf-dist/tex/generic/xlop/xlop.tex
-\op@count@z=\count385
-\op@count@i=\count386
-\op@count@ii=\count387
-\op@count@iii=\count388
-\op@count@iv=\count389
-\op@count@v=\count390
-\op@count@vi=\count391
-\op@nbop=\count392
-\op@currentstyle=\toks57
+\op@count@z=\count386
+\op@count@i=\count387
+\op@count@ii=\count388
+\op@count@iii=\count389
+\op@count@iv=\count390
+\op@count@v=\count391
+\op@count@vi=\count392
+\op@nbop=\count393
+\op@currentstyle=\toks58
 
 `xlop' v0.28  <2020/11/11> (jcc)
-\opcolumnwidth=\dimen357
-\oplineheight=\dimen358
+\opcolumnwidth=\dimen362
+\oplineheight=\dimen363
 \op@strutbox=\box122
-\op@decimalsepwidth=\dimen359
-\op@decimalsepoffset=\dimen360
-\op@hrulewidth=\dimen361
-\op@vrulewidth=\dimen362
-\op@parenthesis=\count393
-\op@token=\count394
-\op@stack=\count395
-\op@stackb=\count396
+\op@decimalsepwidth=\dimen364
+\op@decimalsepoffset=\dimen365
+\op@hrulewidth=\dimen366
+\op@vrulewidth=\dimen367
+\op@parenthesis=\count394
+\op@token=\count395
+\op@stack=\count396
+\op@stackb=\count397
 )) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
-\c@tracingmulticols=\count397
+\c@tracingmulticols=\count398
 \mult@box=\box123
-\multicol@leftmargin=\dimen363
-\c@unbalance=\count398
-\c@collectmore=\count399
-\doublecol@number=\count400
-\multicoltolerance=\count401
-\multicolpretolerance=\count402
-\full@width=\dimen364
-\page@free=\dimen365
-\premulticols=\dimen366
-\postmulticols=\dimen367
+\multicol@leftmargin=\dimen368
+\c@unbalance=\count399
+\c@collectmore=\count400
+\doublecol@number=\count401
+\multicoltolerance=\count402
+\multicolpretolerance=\count403
+\full@width=\dimen369
+\page@free=\dimen370
+\premulticols=\dimen371
+\postmulticols=\dimen372
 \multicolsep=\skip88
 \multicolbaselineskip=\skip89
 \partial@page=\box124
 \last@line=\box125
 \mc@boxedresult=\box126
-\maxbalancingoverflow=\dimen368
+\maxbalancingoverflow=\dimen373
 \mult@rightbox=\box127
 \mult@grightbox=\box128
 \mult@firstbox=\box129
@@ -1242,25 +1252,25 @@ Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
 \@tempa=\box164
 \@tempa=\box165
 \@tempa=\box166
-\c@minrows=\count403
-\c@columnbadness=\count404
-\c@finalcolumnbadness=\count405
-\last@try=\dimen369
-\multicolovershoot=\dimen370
-\multicolundershoot=\dimen371
+\c@minrows=\count404
+\c@columnbadness=\count405
+\c@finalcolumnbadness=\count406
+\last@try=\dimen374
+\multicolovershoot=\dimen375
+\multicolundershoot=\dimen376
 \mult@nat@firstbox=\box167
 \colbreak@box=\box168
-\mc@col@check@num=\count406
+\mc@col@check@num=\count407
 )
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemesmoothbars.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty)
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 85.
+(hyperref)                removing `\\' on input line 86.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 85.
+(hyperref)                removing `\\' on input line 86.
 
 ) (./main.aux
 LaTeX Info: Redefining \. on input line 12.
@@ -1508,7 +1518,7 @@ File: Images/docker.png Graphic file (type bmp)
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 114.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 117.
 
 [6
 
@@ -1517,15 +1527,31 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
 ] [8
 
 ]
-Overfull \hbox (15.86404pt too wide) in paragraph at lines 202--202
- [] 
+Overfull \hbox (21.51012pt too wide) in alignment at lines 211--211
+[][][][][][][] 
  []
 
 [9
 
-] [10
+]
+File: Images/graf_perc.png Graphic file (type bmp)
+<Images/graf_perc.png>
+ [10
 
-] [11
+]
+Overfull \hbox (15.86404pt too wide) in paragraph at lines 239--239
+ [] 
+ []
+
+
+Overfull \vbox (9.52092pt too high) detected at line 239
+ []
+
+[11
+
+] [12
+
+] [13
 
 ]
 \tf@nav=\write6
@@ -1546,15 +1572,15 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1D9AA5857348AAC397E3C32C169CF064;888.
+(rerunfilecheck)             Checksum: A59062450094C7633C0C0C1C3F0897E1;995.
  ) 
 Here is how much of TeX's memory you used:
- 36896 strings out of 476824
- 792765 string characters out of 5803868
- 1936627 words of memory out of 5000000
- 58103 multiletter control sequences out of 15000+600000
- 563317 words of font info for 85 fonts, out of 8000000 for 9000
+ 37003 strings out of 476824
+ 794699 string characters out of 5803868
+ 1937627 words of memory out of 5000000
+ 58195 multiletter control sequences out of 15000+600000
+ 565088 words of font info for 102 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  133i,20n,134p,460b,898s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (11 pages).
+Output written on main.pdf (13 pages).

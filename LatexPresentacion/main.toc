@@ -6,4 +6,5 @@
 \beamer@sectionintoc {5}{Implementación}{6}{0}{5}
 \beamer@sectionintoc {6}{Análisis de rendimiento}{7}{0}{6}
 \beamer@subsectionintoc {6}{1}{Resultados}{7}{0}{6}
-\beamer@sectionintoc {7}{Conclusiones}{9}{0}{7}
+\beamer@subsectionintoc {6}{2}{Resultados}{9}{0}{6}
+\beamer@sectionintoc {7}{Conclusiones}{11}{0}{7}

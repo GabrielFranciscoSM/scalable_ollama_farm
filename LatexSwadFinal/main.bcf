@@ -2372,6 +2372,7 @@
     <bcf:citekey order="8" intorder="1">redisStack</bcf:citekey>
     <bcf:citekey order="9" intorder="1">cosineSim</bcf:citekey>
     <bcf:citekey order="10" intorder="1">nginx</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">locust</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

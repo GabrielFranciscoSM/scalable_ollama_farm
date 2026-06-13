@@ -28,7 +28,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Docker overview}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://docs.docker.com/get-started/docker-overview/
       \endverb
@@ -45,7 +45,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Compose Specification}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://docs.docker.com/reference/compose-file/
       \endverb
@@ -62,7 +62,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Ollama --- Get up and running with large language models}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://ollama.com/
       \endverb
@@ -79,7 +79,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Qwen3.5 --- Model Card}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://ollama.com/library/qwen3.5
       \endverb
@@ -96,7 +96,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{nomic-embed-text --- Model Card}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://ollama.com/library/nomic-embed-text
       \endverb
@@ -113,7 +113,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{LiteLLM --- Call all LLM APIs using the OpenAI format}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://docs.litellm.ai/
       \endverb
@@ -130,7 +130,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Redis Semantic Cache --- LiteLLM Documentation}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://docs.litellm.ai/docs/caching/redis_cache
       \endverb
@@ -147,7 +147,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Redis Stack --- Vector database}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://redis.io/docs/latest/develop/get-started/vector-database/
       \endverb
@@ -173,7 +173,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Cosine similarity}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://en.wikipedia.org/wiki/Cosine_similarity
       \endverb
@@ -190,7 +190,7 @@
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{NGINX Reverse Proxy --- ngx\_http\_proxy\_module}}
-      \field{year}{n.d.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://nginx.org/en/docs/http/ngx_http_proxy_module.html
       \endverb
@@ -199,36 +199,12 @@
       \endverb
     \endentry
     \entry{locust}{online}{}
-      \name{author}{3}{}{%
-        {{hash=d49ead1805f61abc672a283135407559}{%
-           family={Byström},
-           familyi={B\bibinitperiod},
-           given={Carl},
-           giveni={C\bibinitperiod}}}%
-        {{hash=288ef558e1f12e9bed02075832abc398}{%
-           family={Heyman},
-           familyi={H\bibinitperiod},
-           given={Jonatan},
-           giveni={J\bibinitperiod}}}%
-        {{hash=e19d50334839087e4beecf89311cb322}{%
-           family={Holmberg},
-           familyi={H\bibinitperiod},
-           given={Lars},
-           giveni={L\bibinitperiod}}}%
-      }
-      \strng{namehash}{4ed565162a8c8d5761b4ef78e32d333f}
-      \strng{fullhash}{983836ab93d03f8b36654983436f7549}
-      \strng{bibnamehash}{983836ab93d03f8b36654983436f7549}
-      \strng{authorbibnamehash}{983836ab93d03f8b36654983436f7549}
-      \strng{authornamehash}{4ed565162a8c8d5761b4ef78e32d333f}
-      \strng{authorfullhash}{983836ab93d03f8b36654983436f7549}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Accedido: Jun. 2026}
       \field{title}{{Documentación de Locust}}
-      \field{year}{s.f.}
+      \field{year}{2025}
       \verb{urlraw}
       \verb https://docs.locust.io/en/stable/
       \endverb
