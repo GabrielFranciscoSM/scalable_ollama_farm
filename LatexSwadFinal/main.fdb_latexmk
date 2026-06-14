@@ -1,0 +1,20 @@
+# Fdb version 4
+["pdflatex"] 1781434066.95273 "/home/gabriel/clase/swap/Teoría/trabajo_grupal/LatexSwadFinal/main.tex" "main.pdf" "main" 1781434067.00786 2
+  "/home/gabriel/clase/swap/Teoría/trabajo_grupal/LatexSwadFinal/main.tex" 1781434066.08105 4273 0207f9b90c0f138987f8abe5e0d6d692 ""
+  "/usr/share/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1775415801 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
+  "/usr/share/texmf-dist/tex/latex/base/article.cls" 1775415801 20144 b966087dda3b194755eb460d32e2ef75 ""
+  "/usr/share/texmf-dist/tex/latex/base/size11.clo" 1775415801 8464 f339f4d5391fbe0425b2d94c90e6819e ""
+  "/usr/share/texmf-dist/tex/latex/fontspec/fontspec.sty" 1775415801 3804 debc05110ffb506cef68ea4e72c7bcee ""
+  "/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1775415801 30662 bfd6e864f4ffc5018b0e2b6260c3181c ""
+  "/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty" 1775415801 6558 45786cbbf5684a09ee65aa45a7b367e0 ""
+  "/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty" 1775415801 10176 c2fc1c663b3f3899ddac6e6ed3fb1d7e ""
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1775415801 43569 fd570f2fa160877d211e859f687312ba ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780662529 2349412 b9299c279b1eabb59f5159d918494cbe ""
+  "main.aux" 1781434058.95228 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.tex" 1781434066.08105 4273 0207f9b90c0f138987f8abe5e0d6d692 ""
+  "paquetes.tex" 1781427965.15265 2267 2fbbd682c231ed103923671e7446c7de ""
+  (generated)
+  "main.aux"
+  "main.log"
+  "main.pdf"
+  (rewritten before read)
