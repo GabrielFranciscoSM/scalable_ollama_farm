@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  13 JUN 2026 22:49
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.6.6)  19 JUN 2026 17:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1538,20 +1538,15 @@ File: Images/graf_perc.png Graphic file (type bmp)
 <Images/graf_perc.png>
  [10
 
-]
-Overfull \hbox (15.86404pt too wide) in paragraph at lines 239--239
- [] 
- []
-
-
-Overfull \vbox (9.52092pt too high) detected at line 239
- []
-
-[11
+] [11
 
 ] [12
 
 ] [13
+
+] [14
+
+] [15
 
 ]
 \tf@nav=\write6
@@ -1572,15 +1567,15 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A59062450094C7633C0C0C1C3F0897E1;995.
+(rerunfilecheck)             Checksum: BB6C6264812530DC83125B492B857012;1099.
  ) 
 Here is how much of TeX's memory you used:
- 37003 strings out of 476824
- 794699 string characters out of 5803868
- 1937627 words of memory out of 5000000
- 58195 multiletter control sequences out of 15000+600000
+ 37010 strings out of 476824
+ 794755 string characters out of 5803868
+ 1939627 words of memory out of 5000000
+ 58202 multiletter control sequences out of 15000+600000
  565088 words of font info for 102 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  133i,20n,134p,460b,898s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (13 pages).
+Output written on main.pdf (15 pages).

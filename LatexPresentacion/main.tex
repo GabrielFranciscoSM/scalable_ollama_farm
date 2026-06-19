@@ -223,22 +223,41 @@
 \begin{table}[H]
     \centering
 
-    \begin{tabular}{p{5cm}|p{5.5cm}}
+    \begin{tabular}{p{10cm}}
         \toprule
-        \textbf{Cumplido} & \textbf{Limitación}  \\
+        \textbf{Cumplido}  \\
         \midrule
-        Aceleración de 191.5x en latencia con caché. & El umbral fijo no se adapta completamente.\\ \hline
-        Buena detección de paráfrasis en dominios con vocabulario diferenciado.  & En ciencia; por ejemplo; no.    \\ \hline
-        Balanceo equitativo.  & Contamos solo con 2 réplicas de inferencia.   \\ \hline
-        Cambios en la configuración independientes y sencillos. & La latencia se limita con la CPU y se aumenta con el paso intermedio de consultar caché. \\ \hline
-        Puede atender al menos dos peticiones por segundo. & ---  \\ 
+        Aceleración de 191.5x en latencia con caché. \\
+        Buena detección de paráfrasis -- vocabulario diferenciado.   \\ 
+        Balanceo equitativo. \\
+        Cambios en la configuración independientes y sencillos. \\ 
+        Puede atender al menos 2 pets/s. \\ 
         \bottomrule
     \end{tabular}
 
 \end{table}
 \end{frame}
 
-\begin{frame}{Conclusiones}{Trabajo futuro}
+\section{Conclusiones}
+\begin{frame}{Conclusiones}{Limitaciones}
+\begin{table}[H]
+    \centering
+
+    \begin{tabular}{p{10cm}}
+        \toprule
+        \textbf{Limitación}  \\
+        \midrule
+        El umbral fijo no se adapta completamente.\\ 
+        En ciencia; por ejemplo; no.    \\
+        Contamos solo con 2 réplicas de inferencia.   \\ 
+        La latencia se limita por CPU y consultar caché. \\
+        \bottomrule
+    \end{tabular}
+
+\end{table}
+\end{frame}
+
+\begin{frame}{Conclusiones}{Trabajo futuro I}
 \begin{itemize}
     \item Umbral adaptativo.
     \item Caché multinivel.
@@ -247,8 +266,11 @@
     \item Monitorización con Prometheus y Grafana.
     \item Nuevo test de carga.
 \end{itemize}
+\end{frame}
 
-\vspace{0.2cm}
+
+\begin{frame}{Conclusiones}{Trabajo futuro II}
+
 Red:
 
 \begin{itemize}

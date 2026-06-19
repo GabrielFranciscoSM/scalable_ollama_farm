@@ -438,6 +438,12 @@ OUTPUT main.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+INPUT ./main.out
+INPUT ./main.out
+INPUT main.out
+INPUT main.out
+INPUT ./main.out
+INPUT ./main.out
 OUTPUT main.out
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
