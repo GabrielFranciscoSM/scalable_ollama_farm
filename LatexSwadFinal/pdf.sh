@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Asegurar el uso de la instalación funcional de TeX Live 2024 si existe
+if [ -d "/usr/local/texlive/2024/bin/x86_64-linux" ]; then
+    export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
+fi
+
 archivo="main"
 borrar_logs=0
 interactivo=nonstopmode

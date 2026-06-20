@@ -120,6 +120,8 @@ El resto del documento se organiza como sigue: la Sección~2 presenta los fundam
 
 \section{Fundamentos teóricos}
 
+Para comprender el diseño y el funcionamiento de la granja de modelos propuesta, es necesario introducir las tecnologías y conceptos que sirven de base a la infraestructura. A continuación se detallan las herramientas de contenerización, inferencia, enrutamiento, almacenamiento en caché y análisis de rendimiento utilizadas en este proyecto.
+
 \subsection{Docker y Docker Compose}
 
 Docker~\cite{dockerOverview} es una plataforma de contenerización que permite empaquetar aplicaciones y sus dependencias en unidades ligeras y portables llamadas contenedores. A diferencia de las máquinas virtuales, los contenedores comparten el núcleo del sistema anfitrión, lo que reduce la sobrecarga y acelera el arranque.
@@ -194,6 +196,8 @@ Los objetivos del proyecto son los siguientes:
 
 \section{Arquitectura del sistema}
 
+La solución diseñada se basa en una estructura modular donde cada componente desempeña una función específica para garantizar el balanceo de carga y el almacenamiento eficiente de las respuestas. En esta sección se presenta el diagrama de bloques global del sistema y se detalla la función que cumple cada uno de los servicios desplegados.
+
 \subsection{Diagrama de arquitectura}
 
 La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las peticiones de los clientes entran a través de Nginx (puerto~80), que las redirige al \textit{gateway} LiteLLM (puerto~4000). LiteLLM consulta Redis para determinar si la pregunta está cacheada y, en caso de no estarlo, enruta la petición a una de las dos instancias de inferencia mediante la estrategia \texttt{simple-shuffle}. La instancia de embeddings es consultada tanto por LiteLLM (para generar el vector de la pregunta entrante) como por Redis (para comparar con los vectores almacenados en el índice).
@@ -243,12 +247,14 @@ La Figura~\ref{fig:arquitectura} muestra la arquitectura global del sistema. Las
 
 \textbf{Ollama-embed} es una instancia de Ollama dedicada exclusivamente a generar embeddings con el modelo \texttt{nomic-embed-text}. Es consultada por LiteLLM cada vez que se necesita vectorizar una pregunta entrante para la búsqueda en caché. Su separación en un contenedor independiente evita interferencias con la carga de inferencia y permite escalar los servicios de forma independiente.
 
-\textbf{Redis Stack} actúa como almacén del caché semántico, puesto que es una extensión de la base de datos Redis que facilita tratar datos complejos como estos. LiteLLM, a través de su módulo \texttt{RedisSemanticCache}, crea automáticamente un índice vectorial en Redis y almacena las respuestas generadas. Ante búsquedas de similitud, Redis devuelve la respuesta más cercana si supera el umbral anteriormente mencionado.
+\textbf{Redis Stack} actúa como almacén del caché semántico, siendo una extensión de Redis que facilita tratar datos complejos. A través de su módulo \texttt{RedisSemanticCache}, LiteLLM crea automáticamente un índice vectorial en Redis para almacenar las respuestas generadas. Ante búsquedas de similitud, Redis devuelve la respuesta más cercana si supera el umbral anteriormente mencionado.
 
 \textbf{Red \texttt{semantic-cache-net}} es una red \textit{bridge} de Docker que conecta todos los servicios. Permite la resolución DNS interna por nombre de contenedor (ej. \texttt{redis}, \texttt{ollama-1}), lo que simplifica la configuración y aísla el tráfico del sistema del resto del \textit{host}.
 
 \newpage
 \section{Implementación}
+
+Una vez definida la arquitectura, la puesta en marcha del sistema se materializa mediante la configuración detallada de los servicios y sus directivas de red. A continuación se presentan los archivos de configuración y los scripts de inicialización que permiten automatizar y coordinar el arranque de toda la granja de modelos.
 
 \subsection{Orquestación con Docker Compose}
 
@@ -414,9 +420,11 @@ Las directivas clave son \texttt{proxy\_buffering off}, necesaria para que las r
 
 \section{Análisis de rendimiento}
 
+Con el objetivo de cuantificar las ventajas de la caché semántica y la equidad del balanceo de carga, se ha sometido la infraestructura a diversas pruebas experimentales. En esta sección se describe la metodología de medición empleada, la estructura de los grupos de prueba y se analizan detalladamente los resultados obtenidos tanto de manera individual como bajo escenarios de concurrencia.
+
 \subsection{Metodología de evaluación}
 
-Para evaluar el rendimiento del sistema se ha desarrollado un \textit{script} de pruebas en Python (\texttt{test\_litellm.py}) que ejecuta 89 peticiones organizadas en siete grupos experimentales, cada uno diseñado para verificar un aspecto concreto del comportamiento del caché semántico y del balanceo de carga. De forma análoga, empleamos las peticiones para ejecutar Locust y estudiar los tiempos de respuesta.
+Para evaluar el rendimiento del sistema se desarrolló el \textit{script} de pruebas \texttt{test\_litellm.py} en Python. Este ejecuta 89 peticiones organizadas en siete grupos experimentales, cada uno diseñado para verificar un aspecto concreto del comportamiento del caché semántico y del balanceo de carga. De forma análoga, empleamos las peticiones para ejecutar Locust y estudiar los tiempos de respuesta.
 
 La detección de aciertos de caché (HIT) y fallos (MISS) se realiza mediante el análisis de los registros (\textit{logs}) del contenedor de LiteLLM. LiteLLM escribe la cadena \texttt{"Cache Hit!"} en su salida estándar de forma síncrona antes de enviar la respuesta HTTP. El \textit{script} toma una instantánea de los logs antes y después de cada petición; si el contador de ocurrencias de \texttt{"Cache Hit!"} se incrementa, la petición se clasifica como HIT, y como MISS en caso contrario. La instancia de Ollama que atendió cada petición se determina contando las líneas que contienen la URL del \textit{api\_base} correspondiente (\texttt{http://ollama-1:11434} o \texttt{http://ollama-2:11434}). Locust, por otra parte, tras haber configurado en su archivo la fracción correspondiente a cada tarea (\emph{@task}); una por grupo; recoge las métricas correspondientes a cada grupo y podremos consultarlas, ya sea a través de la interfaz o mediante archivos `.csv'.
 
@@ -513,7 +521,7 @@ En la siguiente tabla, vemos el número de peticiones de cada grupo y sus tiempo
 \caption{Resultados agregados por grupo experimental en Locust.}
     \label{tab:resultadosL}
 \small
-  \begin{tabularx}{\textwidth}{lrrrrrr}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrr}
   \toprule
   \textbf{Grupo} & \textbf{Peticiones} & \textbf{Mediana RT} & \textbf{Media RT }& \textbf{Mín. RT} & \textbf{Máx. RT} & \textbf{Tamaño medio} \\
   \midrule
@@ -525,7 +533,7 @@ En la siguiente tabla, vemos el número de peticiones de cada grupo y sus tiempo
   Relacionados distintos & 23 & 1400 & 13803 & 60 & 44017 & 298 \\
   No relacionados & 15 & 410 & 8302 & 60 & 59903 & 305 \\
   \bottomrule
-  \end{tabularx}
+  \end{tabular*}
 \end{table}
 
 Donde RT abrevia \emph{Request Time}, los tiempos se miden en milisegundos y el tamaño en bytes. Se han obviado las columnas de fallos, que estaban a cero, y los porcentiles los aportamos a modo de gráfica a continuación.
@@ -554,6 +562,8 @@ La correlación entre un aumento de las métricas temporales y el número de MIS
 \newpage
 \section{Conclusiones}
 
+El diseño e implementación de esta granja local de modelos de IA ha permitido constatar la viabilidad de servir modelos de lenguaje en equipos modestos mediante mecanismos de optimización. A modo de balance final, en esta sección se evalúa el cumplimiento de los objetivos propuestos, se discuten las limitaciones encontradas y se definen las principales líneas de trabajo futuro.
+
 \subsection{Cumplimiento de objetivos}
 
 Se ha construido y evaluado una granja de modelos de IA completamente funcional que integra balanceo de carga y caché semántico. El sistema se despliega de forma reproducible con un único comando (\texttt{docker compose up -d}) y expone una API compatible con OpenAI a través de un proxy Nginx.
@@ -565,7 +575,7 @@ Los resultados experimentales demuestran que:
     
     \item La detección de paráfrasis funciona correctamente en dominios con vocabulario bien diferenciado (Geografía, 100\,\%; Historia, 70\,\%), aunque presenta limitaciones en dominios técnicos como Ciencias (40\,\%).
     
-    \item El balanceo de carga mediante \texttt{simple-shuffle} distribuye las peticiones de forma equitativa (51\,\%/49\,\%) sin necesidad de lógica compleja.
+    \item El balanceo de carga distribuye las peticiones de forma equitativa (51\,\%/49\,\%) mediante la estrategia \texttt{simple\allowbreak-shuffle} sin lógica compleja.
     
     \item El sistema puede mantener un funcionamiento y velocidad correctos de aproximadamente dos peticiones por segundo con cargas moderadas (aunque repetidas) con tan solo dos instancias.
     

@@ -3,12 +3,18 @@
 \documentclass[a4paper,11pt]{article} %Modifica el tipo de documento y el tamaño de la letra.
 \usepackage{fontspec}
 \usepackage{setspace}
-\setmainfont{Times New Roman}
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}
+}{
+  \IfFontExistsTF{Liberation Serif}{
+    \setmainfont{Liberation Serif}
+  }{}
+}
 \usepackage{titlesec}
 %\setmainfont{Arial}
 \usepackage[utf8]{inputenc} %Formato UTF-8 para caracteres especiales.
 \singlespacing
-\usepackage{lmodern}
+% \usepackage{lmodern}
 \usepackage[
   style = ieee,
   backend = biber,
