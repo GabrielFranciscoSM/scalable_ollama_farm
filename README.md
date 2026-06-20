@@ -30,24 +30,16 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
-3. Ejecutar `pull_ollama_models.sh`
+3. Descarga de modelos (Automática)
 
-Modelo recomendado: `qwen3.5:0.8b`
+Los modelos necesarios (`qwen3.5:0.8b` para inferencia y `nomic-embed-text` para embeddings/búsqueda semántica) se descargan de forma automática al iniciar los contenedores de Ollama mediante los scripts `scripts/ollama-init.sh` y `scripts/ollama-embed-init.sh`. No es necesario ejecutar ningún comando manual para descargarlos.
 
-```bash
-./pull_ollama_models.sh
-```
+4. Probar que funciona con `test_litellm.py`
 
-Si quieres forzar directamente el modelo recomendado:
+Puedes ejecutar el conjunto de pruebas usando `uv` (que gestionará e instalará todas las dependencias declaradas automáticamente) o con Python directamente:
 
 ```bash
-./pull_ollama_models.sh qwen3.5:0.8b
+uv run python test_litellm.py
 ```
 
-4. Probar que funciona con `test_litellm.py` (lest_litellm)
-
-```bash
-python3 test_litellm.py
-```
-
-Si este test responde correctamente, el stack (Ollama + LiteLLM + Nginx + Redis) esta operativo.
+Si este test responde correctamente, el stack (Ollama + LiteLLM + Nginx + Redis) está completamente operativo.
