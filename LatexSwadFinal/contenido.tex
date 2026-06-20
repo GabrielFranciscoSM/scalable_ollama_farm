@@ -301,7 +301,6 @@ services:
 
 Cada instancia de Ollama define un \texttt{entrypoint} personalizado (Listado~\ref{lst:ollamainit}) que ejecuta el servidor Ollama en segundo plano y, tras una breve pausa, descarga el modelo requerido mediante \texttt{ollama pull}. El modelo queda persistido en un volumen con nombre, por lo que reinicios posteriores del contenedor no necesitan volver a descargarlo.
 
-\newpage
 \begin{lstlisting}[    language=bash,
     basicstyle=\ttfamily\small,
     keywordstyle=\color{blue}\bfseries,
